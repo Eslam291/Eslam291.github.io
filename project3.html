@@ -1,85 +1,217 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Smart Pressure-Based Pump Control</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="icon" type="image/png" href="es-logo.png">
+  <title>Smart Water Pumping Station</title>
+  <link rel="icon" href="es-logo.webp" type="image/webp" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet" />
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-    body { background-color: #111; color: #f9f9f9; }
-    .container { max-width: 1200px; margin: 40px auto; padding: 20px; }
-    h1 { font-size: 2.5rem; color: #FFD700; margin-bottom: 20px; text-align: center; }
-    .back-button {
-      display: inline-block;
-      margin-bottom: 30px;
-      background-color: #FFD700;
-      color: #000;
-      padding: 10px 20px;
-      text-decoration: none;
-      border-radius: 5px;
-      font-weight: bold;
-      transition: background 0.3s;
+    body { background: #111; color: #fff; line-height: 1.6; }
+    .container { max-width: 1000px; margin: auto; padding: 20px; }
+
+    h1 { color: #FFD700; text-align: center; margin-bottom: 30px; font-size: 2.2em; }
+    h2 { color: #FFD700; margin-bottom: 20px; margin-top: 40px; }
+
+    .section { margin-bottom: 50px; }
+    .project-img {
+      width: 100%; max-height: 400px; object-fit: contain;
+      border-radius: 10px; margin-bottom: 30px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.5);
     }
-    .back-button:hover { background-color: #e6c200; }
-    .media-grid {
+    iframe {
+      width: 100%; height: 80vh; border: none;
+      border-radius: 8px; box-shadow: 0 0 15px rgba(0,0,0,0.5);
+    }
+    .home-btn {
+      position: fixed; top: 20px; left: 20px;
+      background: #FFD700; color: #000; padding: 10px 20px;
+      border-radius: 8px; font-weight: bold; text-decoration: none;
+      z-index: 10000;
+    }
+
+    .article p { margin-bottom: 15px; }
+    .article h3 { margin-top: 30px; margin-bottom: 10px; color: #FFD700; }
+
+    table {
+      width: 100%; border-collapse: collapse; margin-top: 15px;
+    }
+    th, td {
+      border: 1px solid #444;
+      padding: 12px;
+      text-align: center;
+    }
+    th {
+      background-color: #222;
+      color: #FFD700;
+    }
+
+    /* Gallery */
+    .gallery-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 15px;
-      margin-bottom: 40px;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 10px;
     }
-    .media-grid img,
-    .media-grid video {
-      width: 100%;
-      border-radius: 6px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+    .gallery-grid img {
+      width: 100%; border-radius: 6px; cursor: pointer;
+      transition: transform 0.3s ease;
     }
-    .ppt-viewer {
-      width: 100%;
-      height: 500px;
-      border: none;
+    .gallery-grid img:hover { transform: scale(1.05); }
+
+    .lightbox {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.8); display: none;
+      align-items: center; justify-content: center;
+      z-index: 9999;
     }
+    .lightbox img {
+      max-width: 90%; max-height: 80vh;
+      border-radius: 10px;
+    }
+    .lightbox .close, .lightbox .prev, .lightbox .next {
+      position: absolute; top: 50%;
+      transform: translateY(-50%);
+      font-size: 40px; color: #FFD700; cursor: pointer;
+      user-select: none;
+    }
+    .lightbox .close {
+      top: 20px; right: 30px; font-size: 35px;
+    }
+    .lightbox .prev { left: 30px; }
+    .lightbox .next { right: 30px; }
+
     @media (max-width: 768px) {
-      h1 { font-size: 1.8rem; }
-      .ppt-viewer { height: 400px; }
+      iframe { height: 250px; }
+      h1 { font-size: 1.6em; margin-top: 60px; }
+      .project-img { max-height: 220px; }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <a class="back-button" href="index.html">← Back to Home</a>
-    <h1>Smart Pressure-Based Pump Control</h1>
+  <a href="index.html" class="home-btn">← Home</a>
 
-    <div class="media-grid">
-      <!-- 20 images -->
-      <img src="project{num}_img1.webp" alt="Image 1">
-<img src="project{num}_img2.webp" alt="Image 2">
-<img src="project{num}_img3.webp" alt="Image 3">
-<img src="project{num}_img4.webp" alt="Image 4">
-<img src="project{num}_img5.webp" alt="Image 5">
-<img src="project{num}_img6.webp" alt="Image 6">
-<img src="project{num}_img7.webp" alt="Image 7">
-<img src="project{num}_img8.webp" alt="Image 8">
-<img src="project{num}_img9.webp" alt="Image 9">
-<img src="project{num}_img10.webp" alt="Image 10">
-<img src="project{num}_img11.webp" alt="Image 11">
-<img src="project{num}_img12.webp" alt="Image 12">
-<img src="project{num}_img13.webp" alt="Image 13">
-<img src="project{num}_img14.webp" alt="Image 14">
-<img src="project{num}_img15.webp" alt="Image 15">
-<img src="project{num}_img16.webp" alt="Image 16">
-<img src="project{num}_img17.webp" alt="Image 17">
-<img src="project{num}_img18.webp" alt="Image 18">
-<img src="project{num}_img19.webp" alt="Image 19">
-<img src="project{num}_img20.webp" alt="Image 20">
-      <!-- 1 video -->
-      <video src="project3_video.mp4" controls></video>
+  <div class="container">
+    <h1>Smart Water Pumping Station</h1>
+
+    <img src="cover-project3.webp" alt="Water Pumping Station" class="project-img" />
+
+    <div class="section article">
+      <h2>🚰 Water Pumping Station Control System</h2>
+      <p>This project focuses on designing an automated control system for a water lifting station that utilizes 5 pumps—4 operating and 1 as a standby. The station is managed through a Siemens PLC and HMI interface, with a logic-based control system that optimizes pressure levels and pump utilization over time.</p>
+
+      <h3>🛠️ My Role</h3>
+      <ul>
+        <li>Programming the PLC to manage all automatic and manual operations of the pumping system.</li>
+        <li>Developing the HMI interface, including advanced features such as a manual override popup screen that allows users to operate pumps manually from the HMI in case of external pushbutton failure.</li>
+        <li>Simulating runtime rotation by reducing the actual standby switching logic (normally triggered every 72 hours) to 20 seconds in the simulation video for clarity and demonstration purposes.</li>
+      </ul>
+
+      <h3>💡 System Logic Overview</h3>
+      <p>The system operates in two main modes:</p>
+
+      <h4>1. Manual Mode</h4>
+      <ul>
+        <li>Each pump is controlled individually through selector switches.</li>
+        <li>Start/Stop buttons on the panel are active only in this mode.</li>
+        <li>Run and Fault indicator lamps are available for each pump.</li>
+        <li>Overload protection is provided for each motor; a fault lamp activates upon overload detection.</li>
+      </ul>
+
+      <h4>2. Automatic Mode</h4>
+      <ul>
+        <li>A pressure transmitter (4–20 mA) measures system pressure in bar (0–10 bar).</li>
+        <li>Based on the pressure reading, the system determines how many pumps should be running:</li>
+      </ul>
+
+      <table>
+        <tr><th>Pressure Range (bar)</th><th>Active Pumps</th></tr>
+        <tr><td>0 – 2.5</td><td>4 Pumps</td></tr>
+        <tr><td>2.5 – 5</td><td>3 Pumps</td></tr>
+        <tr><td>5 – 7.5</td><td>2 Pumps</td></tr>
+        <tr><td>7.5 – 10</td><td>1 Pump</td></tr>
+      </table>
+
+      <h3>🔁 Intelligent Standby Pump Rotation</h3>
+      <p>To ensure fair usage across all pumps, the system logs each pump's cumulative runtime. When a pump reaches 72 hours, it is rotated out and replaced with the standby unit. This logic maintains even load distribution and extends equipment life.</p>
+      <p><strong>⚙️ Note:</strong> In simulation, the 72-hour counter was reduced to 20 seconds to showcase this rotation clearly.</p>
+
+      <h3>🔧 Components Involved</h3>
+      <ul>
+        <li><strong>PLC:</strong> Siemens S7 series</li>
+        <li><strong>HMI:</strong> Siemens TP900</li>
+        <li><strong>Pressure Sensor:</strong> 0–10 bar, 4–20 mA output</li>
+        <li><strong>Manual Selector Switches, Start/Stop Push Buttons, Indicator Lamps</strong></li>
+        <li><strong>Overload Relays for motor protection</strong></li>
+        <li><strong>Pumps:</strong> 5 units (4 main + 1 standby)</li>
+      </ul>
     </div>
 
-    <h2 style="color:#FFD700; margin-bottom:15px;">Project Presentation</h2>
-    <iframe class="ppt-viewer" src="project3_slides.pdf"></iframe>
+    <div class="section">
+      <h2>🔍 Image Gallery</h2>
+      <div class="gallery-grid">
+        <img src="gallery3-1.webp" onclick="openLightbox(0)" />
+        <img src="gallery3-2.webp" onclick="openLightbox(1)" />
+        <img src="gallery3-3.webp" onclick="openLightbox(2)" />
+        <img src="gallery3-4.webp" onclick="openLightbox(3)" />
+        <img src="gallery3-5.webp" onclick="openLightbox(4)" />
+        <img src="gallery3-6.webp" onclick="openLightbox(5)" />
+        <img src="gallery3-7.webp" onclick="openLightbox(6)" />
+        <img src="gallery3-8.webp" onclick="openLightbox(7)" />
+        <img src="gallery3-9.webp" onclick="openLightbox(8)" />
+      </div>
+    </div>
+
+    <div class="lightbox" onclick="closeLightbox()">
+      <span class="close" onclick="closeLightbox()">×</span>
+      <span class="prev" onclick="changeImage(-1)">❮</span>
+      <img id="lightbox-img" />
+      <span class="next" onclick="changeImage(1)">❯</span>
+    </div>
+
+    <div class="section">
+      <h2>🎥 Project Simulation Video</h2>
+      <iframe class="video" src="https://drive.google.com/file/d/1IaUd43szW_22NJmWp8WqbSKZSXvct_uD/preview" allow="autoplay"></iframe>
+    </div>
+
+    <div class="section">
+      <h2>📄 OB Code</h2>
+      <iframe class="pdf-viewer" src="https://drive.google.com/file/d/12fVpTeuIR3kR7l7hN7Y9p-P3eRtSD06w/preview"></iframe>
+    </div>
   </div>
+
+  <script>
+    const images = [
+      'gallery3-1.webp','gallery3-2.webp','gallery3-3.webp',
+      'gallery3-4.webp','gallery3-5.webp','gallery3-6.webp',
+      'gallery3-7.webp','gallery3-8.webp','gallery3-9.webp'
+    ];
+    let current = 0;
+
+    function openLightbox(index) {
+      current = index;
+      document.getElementById('lightbox-img').src = images[current];
+      document.querySelector('.lightbox').style.display = 'flex';
+    }
+
+    function closeLightbox() {
+      document.querySelector('.lightbox').style.display = 'none';
+    }
+
+    function changeImage(step) {
+      current = (current + step + images.length) % images.length;
+      document.getElementById('lightbox-img').src = images[current];
+    }
+
+    document.addEventListener('keydown', function(e) {
+      if (document.querySelector('.lightbox').style.display === 'flex') {
+        if (e.key === 'ArrowRight') changeImage(1);
+        if (e.key === 'ArrowLeft') changeImage(-1);
+        if (e.key === 'Escape') closeLightbox();
+      }
+    });
+  </script>
 </body>
 </html>
