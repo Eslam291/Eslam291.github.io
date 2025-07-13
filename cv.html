@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+
   <style>
     * {
       margin: 0; padding: 0;
@@ -78,7 +79,7 @@
     <a class="back-button" href="index.html">← Back to Home</a>
     <h1>My CV</h1>
 
-    <!-- Embedded viewer from Google (with better mobile support) -->
+    <!-- Embedded viewer with lazy loading -->
     <iframe
       loading="lazy"
       src="https://drive.google.com/viewerng/viewer?embedded=true&url=https://eslam291.github.io/cv-eslam-sayed.pdf"
@@ -87,7 +88,7 @@
     </iframe>
 
     <div class="download-link">
-      <a href="cv-eslam-sayed.pdf" download>Download the CV</a>
+      <a href="cv-eslam-sayed.pdf" download type="application/pdf" rel="noopener">Download the CV</a>
     </div>
   </div>
 </body>
