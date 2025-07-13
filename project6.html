@@ -1,0 +1,84 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Project 6 | Eslam Sayed</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+    body { background-color: #111; color: #f9f9f9; }
+    .container { max-width: 1200px; margin: 40px auto; padding: 20px; }
+    h1 { font-size: 2.5rem; color: #FFD700; margin-bottom: 20px; text-align: center; }
+    .back-button {
+      display: inline-block;
+      margin-bottom: 30px;
+      background-color: #FFD700;
+      color: #000;
+      padding: 10px 20px;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+    .back-button:hover { background-color: #e6c200; }
+    .media-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      margin-bottom: 40px;
+    }
+    .media-grid img,
+    .media-grid video {
+      width: 100%;
+      border-radius: 6px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+    }
+    .ppt-viewer {
+      width: 100%;
+      height: 500px;
+      border: none;
+    }
+    @media (max-width: 768px) {
+      h1 { font-size: 1.8rem; }
+      .ppt-viewer { height: 400px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a class="back-button" href="index.html">← Back to Home</a>
+    <h1>Project 6</h1>
+
+    <div class="media-grid">
+      <!-- 20 images -->
+      <img src="project{num}_img1.jpg" alt="Image 1">
+<img src="project{num}_img2.jpg" alt="Image 2">
+<img src="project{num}_img3.jpg" alt="Image 3">
+<img src="project{num}_img4.jpg" alt="Image 4">
+<img src="project{num}_img5.jpg" alt="Image 5">
+<img src="project{num}_img6.jpg" alt="Image 6">
+<img src="project{num}_img7.jpg" alt="Image 7">
+<img src="project{num}_img8.jpg" alt="Image 8">
+<img src="project{num}_img9.jpg" alt="Image 9">
+<img src="project{num}_img10.jpg" alt="Image 10">
+<img src="project{num}_img11.jpg" alt="Image 11">
+<img src="project{num}_img12.jpg" alt="Image 12">
+<img src="project{num}_img13.jpg" alt="Image 13">
+<img src="project{num}_img14.jpg" alt="Image 14">
+<img src="project{num}_img15.jpg" alt="Image 15">
+<img src="project{num}_img16.jpg" alt="Image 16">
+<img src="project{num}_img17.jpg" alt="Image 17">
+<img src="project{num}_img18.jpg" alt="Image 18">
+<img src="project{num}_img19.jpg" alt="Image 19">
+<img src="project{num}_img20.jpg" alt="Image 20">
+      <!-- 1 video -->
+      <video src="project6_video.mp4" controls></video>
+    </div>
+
+    <h2 style="color:#FFD700; margin-bottom:15px;">Project Presentation</h2>
+    <iframe class="ppt-viewer" src="project6_slides.pdf"></iframe>
+  </div>
+</body>
+</html>
