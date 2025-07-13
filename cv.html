@@ -4,10 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>CV | Eslam Sayed</title>
+  <link rel="icon" type="image/png" href="es-logo.png">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
-<link rel="icon" type="image/png" href="es-logo.png">
-
-
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
     body { background-color: #111; color: #fff; }
@@ -49,6 +47,17 @@
       box-shadow: 0 0 15px rgba(0,0,0,0.5);
     }
 
+    .download-link {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .download-link a {
+      color: #FFD700;
+      font-weight: bold;
+      text-decoration: underline;
+    }
+
     @media (max-width: 768px) {
       h1 { font-size: 1.8rem; }
       .pdf-container { height: 65vh; }
@@ -59,7 +68,15 @@
   <div class="container">
     <a class="back-button" href="index.html">← Back to Home</a>
     <h1>My CV</h1>
-    <iframe src="cv-eslam-sayed.pdf" class="pdf-container"></iframe>
+    
+    <iframe 
+      src="https://drive.google.com/viewerng/viewer?embedded=true&url=https://eslam291.github.io/cv-eslam-sayed.pdf" 
+      class="pdf-container">
+    </iframe>
+
+    <div class="download-link">
+      <p>If it doesn't open, you can <a href="cv-eslam-sayed.pdf" download>download the CV</a> instead.</p>
+    </div>
   </div>
 </body>
 </html>
