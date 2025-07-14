@@ -78,16 +78,22 @@
       color: #FFD700;
     }
 
+    /* ✅ تعديل الجاليري للعرض بشكل سلايدر */
     .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      display: flex;
+      overflow-x: auto;
       gap: 15px;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 10px;
     }
 
     .gallery-grid img {
-      width: 100%;
+      flex: 0 0 auto;
+      width: 250px;
       border-radius: 10px;
       cursor: pointer;
+      scroll-snap-align: start;
       transition: transform 0.3s;
     }
 
@@ -225,6 +231,7 @@
       </ul>
     </div>
 
+
     <div class="section">
       <h2>📷 Image Gallery</h2>
       <div class="gallery-grid">
@@ -288,7 +295,6 @@
       }
     });
 
-    // Touch swipe support for mobile
     let touchStartX = 0;
     let touchEndX = 0;
 
