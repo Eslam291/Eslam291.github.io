@@ -1,85 +1,355 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Project 1</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="icon" type="image/png" href="es-logo.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Commercial Building Project</title>
+  <link rel="icon" href="es-logo.webp" type="image/webp" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet"/>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-    body { background-color: #111; color: #f9f9f9; }
-    .container { max-width: 1200px; margin: 40px auto; padding: 20px; }
-    h1 { font-size: 2.5rem; color: #FFD700; margin-bottom: 20px; text-align: center; }
-    .back-button {
-      display: inline-block;
-      margin-bottom: 30px;
-      background-color: #FFD700;
+    body { background: #111; color: #fff; line-height: 1.6; }
+    .container { max-width: 1000px; margin: auto; padding: 20px; }
+    h1 { color: #FFD700; text-align: center; margin-bottom: 20px; font-size: 2.2em; }
+    h2, h3 { color: #FFD700; margin: 30px 0 15px; }
+    .section { margin-bottom: 40px; }
+    .project-img { width: 100%; max-height: 400px; object-fit: contain; border-radius: 10px; margin-bottom: 30px; box-shadow: 0 0 15px rgba(0, 0, 0, 0.5); }
+
+    iframe.pdf-viewer, iframe.video {
+      width: 100%;
+      height: 60vh;
+      border: none;
+      border-radius: 8px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.5);
+    }
+
+    .home-btn {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background: #FFD700;
       color: #000;
       padding: 10px 20px;
-      text-decoration: none;
-      border-radius: 5px;
+      border-radius: 8px;
       font-weight: bold;
-      transition: background 0.3s;
+      text-decoration: none;
+      z-index: 10000;
     }
-    .back-button:hover { background-color: #e6c200; }
-    .media-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+
+    .article p { margin-bottom: 15px; }
+    .article h3 { color: #FFD700; }
+
+    .gallery-section h3 {
+      margin: 20px 0 10px;
+      color: #FFD700;
+    }
+
+    .gallery-grid {
+      display: flex;
+      overflow-x: auto;
       gap: 15px;
-      margin-bottom: 40px;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 10px;
     }
-    .media-grid img,
-    .media-grid video {
-      width: 100%;
-      border-radius: 6px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+.gallery-grid img {
+  flex: 0 0 auto;
+  width: 250px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 10px;
+  cursor: pointer;
+  scroll-snap-align: start;
+  transition: transform 0.3s;
+  border: 2px solid #FFD700;
+}
+
+
+    .gallery-grid img:hover {
+      transform: scale(1.05);
     }
-    .ppt-viewer {
-      width: 100%;
-      height: 500px;
+
+    .gallery-grid::-webkit-scrollbar {
+      height: 8px;
+    }
+
+    .gallery-grid::-webkit-scrollbar-track {
+      background: #333;
+      border-radius: 4px;
+    }
+
+    .gallery-grid::-webkit-scrollbar-thumb {
+      background: #FFD700;
+      border-radius: 4px;
+    }
+
+    .lightbox {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      flex-direction: column;
+    }
+
+    .lightbox img {
+      max-width: 90%;
+      max-height: 80vh;
+      border-radius: 10px;
+    }
+
+    .lightbox .close, .lightbox .prev, .lightbox .next {
+      position: absolute;
+      font-size: 30px;
+      color: #FFD700;
+      background: none;
       border: none;
+      cursor: pointer;
+      font-weight: bold;
     }
+
+    .lightbox .close { top: 20px; right: 30px; }
+    .lightbox .prev { left: 30px; top: 50%; transform: translateY(-50%); }
+    .lightbox .next { right: 30px; top: 50%; transform: translateY(-50%); }
+
     @media (max-width: 768px) {
-      h1 { font-size: 1.8rem; }
-      .ppt-viewer { height: 400px; }
+      iframe.pdf-viewer, iframe.video { height: 250px; }
+      .home-btn { top: 10px; left: 10px; padding: 8px 14px; font-size: 14px; }
+      h1 { font-size: 1.5em; margin-top: 60px; }
+      .project-img { max-height: 220px; }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <a class="back-button" href="index.html">← Back to Home</a>
-    <h1>Commercial building</h1>
 
-    <div class="media-grid">
-      <!-- 20 images -->
-      <img src="project{num}_img1.webp" alt="Image 1">
-<img src="project{num}_img2.webp" alt="Image 2">
-<img src="project{num}_img3.webp" alt="Image 3">
-<img src="project{num}_img4.webp" alt="Image 4">
-<img src="project{num}_img5.webp" alt="Image 5">
-<img src="project{num}_img6.webp" alt="Image 6">
-<img src="project{num}_img7.webp" alt="Image 7">
-<img src="project{num}_img8.webp" alt="Image 8">
-<img src="project{num}_img9.webp" alt="Image 9">
-<img src="project{num}_img10.webp" alt="Image 10">
-<img src="project{num}_img11.webp" alt="Image 11">
-<img src="project{num}_img12.webp" alt="Image 12">
-<img src="project{num}_img13.webp" alt="Image 13">
-<img src="project{num}_img14.webp" alt="Image 14">
-<img src="project{num}_img15.webp" alt="Image 15">
-<img src="project{num}_img16.webp" alt="Image 16">
-<img src="project{num}_img17.webp" alt="Image 17">
-<img src="project{num}_img18.webp" alt="Image 18">
-<img src="project{num}_img19.webp" alt="Image 19">
-<img src="project{num}_img20.webp" alt="Image 20">
-      <!-- 1 video -->
-      <video src="project5_video.mp4" controls></video>
+  <a href="index.html" class="home-btn">← Home</a>
+
+  <div class="container">
+    <h1>Commercial Building</h1>
+
+    <img src="cover-project5.webp" alt="Commercial Building Schematic" class="project-img" />
+
+<div class="section article">
+  <h2>🏢 Project Overview</h2>
+  <p>This project involved the complete electrical design of a commercial building consisting of two floors and a roof, with an open space between the first and second floors (double-height area). The system design adhered strictly to the Egyptian code, ensuring proper lighting distribution, safety, and load management.</p>
+
+  <h3>💡 Lighting Design</h3>
+  <p>Lighting fixtures were selected based on room usage and classification of loads into Normal, Emergency, and UPS loads. Dialux Evo software was used to perform lighting calculations and ensure proper illumination levels in all areas.</p>
+
+  <p><strong>Types of Fixtures Used:</strong></p>
+  <ul>
+    <li>60x60 Surface Mounted</li>
+    <li>Circular LED (IP20/IP44)</li>
+    <li>Ceiling Mounted Linear LED Profile (IP44)</li>
+    <li>Wall Mounted Circular</li>
+    <li>Magnetic Track</li>
+    <li>Pendant LED Linear (IP44)</li>
+    <li>Circular Suspended LED</li>
+    <li>Wall Emergency LED for Stairs (IP44)</li>
+    <li>Exit Sign</li>
+  </ul>
+
+  <h3>🔌 Electrical Distribution</h3>
+  <p>The building includes three main distribution boards (MDB, SMDB, EMDB) and one ATS panel.</p>
+
+  <p><strong>MDB supplies:</strong></p>
+  <ul>
+    <li>SMDB, EMDB, MCCs for RF/VRV & AHU</li>
+    <li>Two chillers</li>
+    <li>Elevator system</li>
+        </ul>
+
+      <p><strong>SMDB supplies:</strong></p>
+      <ul>
+        <li>Normal and HVAC DBs for each floor and the roof (DB-GF, DBHV-GF, DB-FF, DBHV-FF, DB-R)</li>
+      </ul>
+
+      <p>Each DB includes proper breaker sizing and overload protection per Egyptian Code, with MCCBs in main boards and MCBs in sub-panels. Earth leakage protection was also applied where needed.</p>
+
+      <h3>🔋 Generator & Light Current</h3>
+      <p>The generator sizing was done using Cummins software, ensuring capacity matches load demand.</p>
+      <p>The project also includes full Light Current systems with shop drawings for:</p>
+      <ul>
+        <li>Fire Fighting</li>
+        <li>CCTV</li>
+        <li>Data & Telephone</li>
+      </ul>
+
+      <h3>📐 Drawings & Deliverables</h3>
+      <ul>
+        <li>Full Single Line Diagram (SLD) for the building and MCC panels</li>
+        <li>Load schedules with circuit breaker sizing</li>
+        <li>Complete lighting calculations (Dialux)</li>
+        <li>Shop drawings for light current systems</li>
+        <li>Generator sizing report</li>
+      </ul>
+
+      <p><strong>This project was fully executed individually, from concept to final design.</strong></p>
     </div>
 
-    <h2 style="color:#FFD700; margin-bottom:15px;">Project Presentation</h2>
-    <iframe class="ppt-viewer" src="project5_slides.pdf"></iframe>
+   <!-- 🔲 GALLERY SECTIONS -->
+<div class="section gallery-section">
+  <h2>📷 Project Gallery</h2>
+
+  <h3>💡 Lighting</h3>
+  <div class="gallery-grid">
+    <img src="light-1.webp" onclick="openLightbox(0)" loading="lazy" alt="Lighting 1">
+    <img src="light-2.webp" onclick="openLightbox(1)" loading="lazy" alt="Lighting 2">
+    <img src="light-3.webp" onclick="openLightbox(2)" loading="lazy" alt="Lighting 3">
+    <img src="light-4.webp" onclick="openLightbox(3)" loading="lazy" alt="Lighting 4">
+    <img src="light-5.webp" onclick="openLightbox(4)" loading="lazy" alt="Lighting 5">
+    <img src="light-6.webp" onclick="openLightbox(5)" loading="lazy" alt="Lighting 6">
+    <img src="light-7.webp" onclick="openLightbox(6)" loading="lazy" alt="Lighting 7">
+    <img src="light-8.webp" onclick="openLightbox(7)" loading="lazy" alt="Lighting 8">
   </div>
+
+  <h3>📐 Plans</h3>
+  <div class="gallery-grid">
+    <img src="plan-1.webp" onclick="openLightbox(8)" loading="lazy" alt="Plan 1">
+    <img src="plan-2.webp" onclick="openLightbox(9)" loading="lazy" alt="Plan 2">
+    <img src="plan-3.webp" onclick="openLightbox(10)" loading="lazy" alt="Plan 3">
+    <img src="plan-4.webp" onclick="openLightbox(11)" loading="lazy" alt="Plan 4">
+    <img src="plan-5.webp" onclick="openLightbox(12)" loading="lazy" alt="Plan 5">
+    <img src="plan-6.webp" onclick="openLightbox(13)" loading="lazy" alt="Plan 6">
+    <img src="plan-7.webp" onclick="openLightbox(14)" loading="lazy" alt="Plan 7">
+    <img src="plan-8.webp" onclick="openLightbox(15)" loading="lazy" alt="Plan 8">
+    <img src="plan-9.webp" onclick="openLightbox(16)" loading="lazy" alt="Plan 9">
+    <img src="plan-10.webp" onclick="openLightbox(17)" loading="lazy" alt="Plan 10">
+    <img src="plan-11.webp" onclick="openLightbox(18)" loading="lazy" alt="Plan 11">
+    <img src="plan-12.webp" onclick="openLightbox(19)" loading="lazy" alt="Plan 12">
+  </div>
+
+  <h3>⚡ Electrical Panel Boards</h3>
+  <div class="gallery-grid">
+    <img src="panel-1.webp" onclick="openLightbox(20)" loading="lazy" alt="Panel 1">
+    <img src="panel-2.webp" onclick="openLightbox(21)" loading="lazy" alt="Panel 2">
+    <img src="panel-3.webp" onclick="openLightbox(22)" loading="lazy" alt="Panel 3">
+    <img src="panel-4.webp" onclick="openLightbox(23)" loading="lazy" alt="Panel 4">
+    <img src="panel-5.webp" onclick="openLightbox(24)" loading="lazy" alt="Panel 5">
+    <img src="panel-6.webp" onclick="openLightbox(25)" loading="lazy" alt="Panel 6">
+    <img src="panel-7.webp" onclick="openLightbox(26)" loading="lazy" alt="Panel 7">
+    <img src="panel-8.webp" onclick="openLightbox(27)" loading="lazy" alt="Panel 8">
+    <img src="panel-9.webp" onclick="openLightbox(28)" loading="lazy" alt="Panel 9">
+  </div>
+
+  <h3>📊 Single Line Diagrams</h3>
+  <div class="gallery-grid">
+    <img src="sld-1.webp" onclick="openLightbox(29)" loading="lazy" alt="SLD 1">
+    <img src="sld-2.webp" onclick="openLightbox(30)" loading="lazy" alt="SLD 2">
+    <img src="sld-3.webp" onclick="openLightbox(31)" loading="lazy" alt="SLD 3">
+    <img src="sld-4.webp" onclick="openLightbox(32)" loading="lazy" alt="SLD 4">
+    <img src="sld-5.webp" onclick="openLightbox(33)" loading="lazy" alt="SLD 5">
+    <img src="sld-6.webp" onclick="openLightbox(34)" loading="lazy" alt="SLD 6">
+    <img src="sld-7.webp" onclick="openLightbox(35)" loading="lazy" alt="SLD 7">
+    <img src="sld-8.webp" onclick="openLightbox(36)" loading="lazy" alt="SLD 8">
+  </div>
+
+  <h3>🔥 Fire Fighting</h3>
+  <div class="gallery-grid">
+    <img src="fire-1.webp" onclick="openLightbox(37)" loading="lazy" alt="Fire 1">
+    <img src="fire-2.webp" onclick="openLightbox(38)" loading="lazy" alt="Fire 2">
+    <img src="fire-3.webp" onclick="openLightbox(39)" loading="lazy" alt="Fire 3">
+    <img src="fire-4.webp" onclick="openLightbox(40)" loading="lazy" alt="Fire 4">
+    <img src="fire-5.webp" onclick="openLightbox(41)" loading="lazy" alt="Fire 5">
+  </div>
+
+  <h3>📡 Data & Telephone</h3>
+  <div class="gallery-grid">
+    <img src="data-1.webp" onclick="openLightbox(42)" loading="lazy" alt="Data 1">
+    <img src="data-2.webp" onclick="openLightbox(43)" loading="lazy" alt="Data 2">
+    <img src="data-3.webp" onclick="openLightbox(44)" loading="lazy" alt="Data 3">
+    <img src="data-4.webp" onclick="openLightbox(45)" loading="lazy" alt="Data 4">
+    <img src="data-5.webp" onclick="openLightbox(46)" loading="lazy" alt="Data 5">
+  </div>
+
+  <h3>🎥 CCTV</h3>
+  <div class="gallery-grid">
+    <img src="cctv-1.webp" onclick="openLightbox(47)" loading="lazy" alt="CCTV 1">
+    <img src="cctv-2.webp" onclick="openLightbox(48)" loading="lazy" alt="CCTV 2">
+    <img src="cctv-3.webp" onclick="openLightbox(49)" loading="lazy" alt="CCTV 3">
+    <img src="cctv-4.webp" onclick="openLightbox(50)" loading="lazy" alt="CCTV 4">
+  </div>
+
+  <div class="lightbox" onclick="closeLightbox()">
+    <button class="close">✖</button>
+    <button class="prev" onclick="event.stopPropagation(); changeImage(-1)">❮</button>
+    <img id="lightbox-img" src="" />
+    <button class="next" onclick="event.stopPropagation(); changeImage(1)">❯</button>
+  </div>
+</div>
+
+
+    <!-- 📄 PRESENTATION -->
+    <div class="section">
+      <h2>📑 Presentation</h2>
+      <iframe class="pdf-viewer" src="https://drive.google.com/file/d/1IMzFzCDt6wEpN7op0RpjN7bFOw_e5rK-/preview"></iframe>
+    </div>
+
+    <!-- 📄 INDIVIDUAL TASKS -->
+    <div class="section">
+      <h2>📌 Some Individual Tasks</h2>
+      <iframe class="pdf-viewer" src="https://drive.google.com/file/d/1nETJ73KnQVlSdJVeGv3RIleGsDInJ0Fu/preview"></iframe>
+    </div>
+  </div>
+
+  <script>
+const images = [
+  'light-1.webp','light-2.webp','light-3.webp','light-4.webp','light-5.webp','light-6.webp','light-7.webp','light-8.webp',
+  'plan-1.webp','plan-2.webp','plan-3.webp','plan-4.webp','plan-5.webp','plan-6.webp','plan-7.webp','plan-8.webp','plan-9.webp','plan-10.webp','plan-11.webp','plan-12.webp',
+  'panel-1.webp','panel-2.webp','panel-3.webp','panel-4.webp','panel-5.webp','panel-6.webp','panel-7.webp','panel-8.webp','panel-9.webp',
+  'sld-1.webp','sld-2.webp','sld-3.webp','sld-4.webp','sld-5.webp','sld-6.webp','sld-7.webp','sld-8.webp',
+  'fire-1.webp','fire-2.webp','fire-3.webp','fire-4.webp','fire-5.webp',
+  'data-1.webp','data-2.webp','data-3.webp','data-4.webp','data-5.webp',
+  'cctv-1.webp','cctv-2.webp','cctv-3.webp','cctv-4.webp'
+];
+
+    let current = 0;
+
+    function openLightbox(index) {
+      current = index;
+      document.getElementById('lightbox-img').src = images[current];
+      document.querySelector('.lightbox').style.display = 'flex';
+    }
+
+    function closeLightbox() {
+      document.querySelector('.lightbox').style.display = 'none';
+    }
+
+    function changeImage(step) {
+      current = (current + step + images.length) % images.length;
+      document.getElementById('lightbox-img').src = images[current];
+    }
+
+    document.addEventListener('keydown', function(e) {
+      if (document.querySelector('.lightbox').style.display === 'flex') {
+        if (e.key === 'ArrowRight') changeImage(1);
+        if (e.key === 'ArrowLeft') changeImage(-1);
+        if (e.key === 'Escape') closeLightbox();
+      }
+    });
+
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    const lightbox = document.querySelector('.lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+
+    lightbox.addEventListener('touchstart', function(e) {
+      touchStartX = e.changedTouches[0].screenX;
+    });
+
+    lightbox.addEventListener('touchend', function(e) {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+    });
+
+    function handleSwipe() {
+      if (touchEndX < touchStartX - 50) changeImage(1);
+      if (touchEndX > touchStartX + 50) changeImage(-1);
+    }
+  </script>
 </body>
 </html>
