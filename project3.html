@@ -9,84 +9,155 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet" />
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-    body { background: #111; color: #fff; line-height: 1.6; }
-    .container { max-width: 1000px; margin: auto; padding: 20px; }
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+    body {
+      background: #111; color: #fff; line-height: 1.6;
+    }
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 20px;
+    }
 
-    h1 { color: #FFD700; text-align: center; margin-bottom: 30px; font-size: 2.2em; }
-    h2 { color: #FFD700; margin-bottom: 20px; margin-top: 40px; }
+    h1 {
+      color: #FFD700;
+      margin-bottom: 20px;
+      text-align: center;
+      font-size: 2.2em;
+    }
 
-    .section { margin-bottom: 50px; }
+    h2 {
+      color: #FFD700;
+      margin-bottom: 20px;
+    }
+
+    .section {
+      margin-bottom: 40px;
+    }
+
     .project-img {
-      width: 100%; max-height: 400px; object-fit: contain;
-      border-radius: 10px; margin-bottom: 30px;
+      width: 100%;
+      max-height: 400px;
+      object-fit: contain;
+      border-radius: 10px;
+      margin-bottom: 30px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    }
+
+    iframe.pdf-viewer, iframe.video {
+      width: 100%;
+      height: 80vh;
+      border: none;
+      border-radius: 8px;
       box-shadow: 0 0 15px rgba(0,0,0,0.5);
     }
-    iframe {
-      width: 100%; height: 80vh; border: none;
-      border-radius: 8px; box-shadow: 0 0 15px rgba(0,0,0,0.5);
-    }
+
     .home-btn {
-      position: fixed; top: 20px; left: 20px;
-      background: #FFD700; color: #000; padding: 10px 20px;
-      border-radius: 8px; font-weight: bold; text-decoration: none;
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background: #FFD700;
+      color: #000;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: bold;
+      text-decoration: none;
       z-index: 10000;
     }
 
-    .article p { margin-bottom: 15px; }
-    .article h3 { margin-top: 30px; margin-bottom: 10px; color: #FFD700; }
+    .article p {
+      margin-bottom: 15px;
+    }
 
-    table {
-      width: 100%; border-collapse: collapse; margin-top: 15px;
-    }
-    th, td {
-      border: 1px solid #444;
-      padding: 12px;
-      text-align: center;
-    }
-    th {
-      background-color: #222;
+    .article h3 {
+      margin-top: 30px;
+      margin-bottom: 10px;
       color: #FFD700;
     }
 
-    /* Gallery */
     .gallery-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 10px;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 15px;
     }
+
     .gallery-grid img {
-      width: 100%; border-radius: 6px; cursor: pointer;
-      transition: transform 0.3s ease;
+      width: 100%;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: transform 0.3s;
     }
-    .gallery-grid img:hover { transform: scale(1.05); }
+
+    .gallery-grid img:hover {
+      transform: scale(1.05);
+    }
 
     .lightbox {
-      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0,0,0,0.8); display: none;
-      align-items: center; justify-content: center;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      display: none;
+      align-items: center;
+      justify-content: center;
       z-index: 9999;
+      flex-direction: column;
     }
+
     .lightbox img {
-      max-width: 90%; max-height: 80vh;
+      max-width: 90%;
+      max-height: 80vh;
       border-radius: 10px;
     }
+
     .lightbox .close, .lightbox .prev, .lightbox .next {
-      position: absolute; top: 50%;
-      transform: translateY(-50%);
-      font-size: 40px; color: #FFD700; cursor: pointer;
-      user-select: none;
+      position: absolute;
+      top: 20px;
+      font-size: 30px;
+      color: #FFD700;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
     }
+
     .lightbox .close {
-      top: 20px; right: 30px; font-size: 35px;
+      right: 30px;
     }
-    .lightbox .prev { left: 30px; }
-    .lightbox .next { right: 30px; }
+
+    .lightbox .prev {
+      left: 30px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .lightbox .next {
+      right: 30px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
 
     @media (max-width: 768px) {
-      iframe { height: 250px; }
-      h1 { font-size: 1.6em; margin-top: 60px; }
-      .project-img { max-height: 220px; }
+      iframe.pdf-viewer, iframe.video { height: 250px; }
+
+      .home-btn {
+        top: 10px !important;
+        left: 10px !important;
+        padding: 8px 14px !important;
+        font-size: 14px !important;
+      }
+
+      h1 {
+        font-size: 1.5em;
+        margin-top: 60px;
+      }
+
+      .project-img {
+        max-height: 220px;
+      }
     }
   </style>
 </head>
@@ -96,10 +167,11 @@
   <div class="container">
     <h1>Smart Water Pumping Station</h1>
 
-    <img src="cover-project3.webp" alt="Water Pumping Station" class="project-img" />
+    <img src="cover-project3.webp" alt="Water Station Schematic" class="project-img" />
 
     <div class="section article">
       <h2>🚰 Water Pumping Station Control System</h2>
+
       <p>This project focuses on designing an automated control system for a water lifting station that utilizes 5 pumps—4 operating and 1 as a standby. The station is managed through a Siemens PLC and HMI interface, with a logic-based control system that optimizes pressure levels and pump utilization over time.</p>
 
       <h3>🛠️ My Role</h3>
@@ -112,7 +184,7 @@
       <h3>💡 System Logic Overview</h3>
       <p>The system operates in two main modes:</p>
 
-      <h4>1. Manual Mode</h4>
+      <strong>1. Manual Mode</strong>
       <ul>
         <li>Each pump is controlled individually through selector switches.</li>
         <li>Start/Stop buttons on the panel are active only in this mode.</li>
@@ -120,18 +192,22 @@
         <li>Overload protection is provided for each motor; a fault lamp activates upon overload detection.</li>
       </ul>
 
-      <h4>2. Automatic Mode</h4>
+      <strong>2. Automatic Mode</strong>
       <ul>
         <li>A pressure transmitter (4–20 mA) measures system pressure in bar (0–10 bar).</li>
         <li>Based on the pressure reading, the system determines how many pumps should be running:</li>
       </ul>
 
-      <table>
-        <tr><th>Pressure Range (bar)</th><th>Active Pumps</th></tr>
-        <tr><td>0 – 2.5</td><td>4 Pumps</td></tr>
-        <tr><td>2.5 – 5</td><td>3 Pumps</td></tr>
-        <tr><td>5 – 7.5</td><td>2 Pumps</td></tr>
-        <tr><td>7.5 – 10</td><td>1 Pump</td></tr>
+      <table border="1" style="width:100%; text-align:center; color:#fff; border-collapse: collapse; margin: 20px 0;">
+        <thead style="background:#FFD700; color:#000;">
+          <tr><th>Pressure Range (bar)</th><th>Active Pumps</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>0 – 2.5</td><td>4 Pumps</td></tr>
+          <tr><td>2.5 – 5</td><td>3 Pumps</td></tr>
+          <tr><td>5 – 7.5</td><td>2 Pumps</td></tr>
+          <tr><td>7.5 – 10</td><td>1 Pump</td></tr>
+        </tbody>
       </table>
 
       <h3>🔁 Intelligent Standby Pump Rotation</h3>
@@ -144,31 +220,30 @@
         <li><strong>HMI:</strong> Siemens TP900</li>
         <li><strong>Pressure Sensor:</strong> 0–10 bar, 4–20 mA output</li>
         <li><strong>Manual Selector Switches, Start/Stop Push Buttons, Indicator Lamps</strong></li>
-        <li><strong>Overload Relays for motor protection</strong></li>
+        <li><strong>Overload Relays</strong> for motor protection</li>
         <li><strong>Pumps:</strong> 5 units (4 main + 1 standby)</li>
       </ul>
     </div>
 
     <div class="section">
-      <h2>🔍 Image Gallery</h2>
+      <h2>📷 Image Gallery</h2>
       <div class="gallery-grid">
-        <img src="gallery3-1.webp" onclick="openLightbox(0)" />
-        <img src="gallery3-2.webp" onclick="openLightbox(1)" />
-        <img src="gallery3-3.webp" onclick="openLightbox(2)" />
-        <img src="gallery3-4.webp" onclick="openLightbox(3)" />
-        <img src="gallery3-5.webp" onclick="openLightbox(4)" />
-        <img src="gallery3-6.webp" onclick="openLightbox(5)" />
-        <img src="gallery3-7.webp" onclick="openLightbox(6)" />
-        <img src="gallery3-8.webp" onclick="openLightbox(7)" />
-        <img src="gallery3-9.webp" onclick="openLightbox(8)" />
+        <img src="gallery3-1.webp" onclick="openLightbox(0)">
+        <img src="gallery3-2.webp" onclick="openLightbox(1)">
+        <img src="gallery3-3.webp" onclick="openLightbox(2)">
+        <img src="gallery3-4.webp" onclick="openLightbox(3)">
+        <img src="gallery3-5.webp" onclick="openLightbox(4)">
+        <img src="gallery3-6.webp" onclick="openLightbox(5)">
+        <img src="gallery3-7.webp" onclick="openLightbox(6)">
+        <img src="gallery3-8.webp" onclick="openLightbox(7)">
+        <img src="gallery3-9.webp" onclick="openLightbox(8)">
       </div>
-    </div>
-
-    <div class="lightbox" onclick="closeLightbox()">
-      <span class="close" onclick="closeLightbox()">×</span>
-      <span class="prev" onclick="changeImage(-1)">❮</span>
-      <img id="lightbox-img" />
-      <span class="next" onclick="changeImage(1)">❯</span>
+      <div class="lightbox" onclick="closeLightbox()">
+        <button class="close">✖</button>
+        <button class="prev" onclick="event.stopPropagation(); changeImage(-1)">❮</button>
+        <img id="lightbox-img" src="" />
+        <button class="next" onclick="event.stopPropagation(); changeImage(1)">❯</button>
+      </div>
     </div>
 
     <div class="section">
@@ -212,6 +287,27 @@
         if (e.key === 'Escape') closeLightbox();
       }
     });
+
+    // Touch swipe support for mobile
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    const lightbox = document.querySelector('.lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+
+    lightbox.addEventListener('touchstart', function(e) {
+      touchStartX = e.changedTouches[0].screenX;
+    });
+
+    lightbox.addEventListener('touchend', function(e) {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+    });
+
+    function handleSwipe() {
+      if (touchEndX < touchStartX - 50) changeImage(1);
+      if (touchEndX > touchStartX + 50) changeImage(-1);
+    }
   </script>
 </body>
 </html>
