@@ -96,10 +96,13 @@
     }
 
     .lightbox img {
-      max-width: 90%;
-      max-height: 80vh;
-      border-radius: 10px;
-    }
+  width: 90vw;
+  height: auto;
+  max-height: 90vh;
+  object-fit: contain;
+  border-radius: 10px;
+  box-shadow: 0 0 25px rgba(255, 215, 0, 0.3);
+}
 
     .lightbox .close, .lightbox .prev, .lightbox .next {
       position: absolute;
@@ -331,25 +334,7 @@ const images = [
       }
     });
 
-    let touchStartX = 0;
-    let touchEndX = 0;
 
-    const lightbox = document.querySelector('.lightbox');
-    const lightboxImg = document.getElementById('lightbox-img');
-
-    lightbox.addEventListener('touchstart', function(e) {
-      touchStartX = e.changedTouches[0].screenX;
-    });
-
-    lightbox.addEventListener('touchend', function(e) {
-      touchEndX = e.changedTouches[0].screenX;
-      handleSwipe();
-    });
-
-    function handleSwipe() {
-      if (touchEndX < touchStartX - 50) changeImage(1);
-      if (touchEndX > touchStartX + 50) changeImage(-1);
-    }
   </script>
 </body>
 </html>
