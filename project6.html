@@ -1,85 +1,208 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Project 2</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="icon" type="image/png" href="es-logo.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Commercial Building</title>
+  <link rel="icon" href="es-logo.webp" type="image/webp" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet"/>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-    body { background-color: #111; color: #f9f9f9; }
-    .container { max-width: 1200px; margin: 40px auto; padding: 20px; }
-    h1 { font-size: 2.5rem; color: #FFD700; margin-bottom: 20px; text-align: center; }
-    .back-button {
-      display: inline-block;
-      margin-bottom: 30px;
-      background-color: #FFD700;
+    body { background: #111; color: #fff; line-height: 1.6; }
+    .container { max-width: 1000px; margin: auto; padding: 20px; }
+    h1 { color: #FFD700; text-align: center; margin-bottom: 20px; font-size: 2.2em; }
+    h2, h3 { color: #FFD700; margin: 30px 0 15px; }
+
+    .section { margin-bottom: 40px; }
+    .project-img { width: 100%; max-height: 400px; object-fit: contain; border-radius: 10px; margin-bottom: 30px; box-shadow: 0 0 15px rgba(0, 0, 0, 0.5); }
+
+    iframe.pdf-viewer {
+      width: 100%;
+      height: 80vh;
+      border: none;
+      border-radius: 8px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.5);
+    }
+
+    .home-btn {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background: #FFD700;
       color: #000;
       padding: 10px 20px;
-      text-decoration: none;
-      border-radius: 5px;
+      border-radius: 8px;
       font-weight: bold;
-      transition: background 0.3s;
+      text-decoration: none;
+      z-index: 10000;
     }
-    .back-button:hover { background-color: #e6c200; }
-    .media-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+
+    .article p { margin-bottom: 15px; }
+    .article h3 { color: #FFD700; }
+
+    .gallery-grid {
+      display: flex;
+      overflow-x: auto;
       gap: 15px;
-      margin-bottom: 40px;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 10px;
     }
-    .media-grid img,
-    .media-grid video {
-      width: 100%;
-      border-radius: 6px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+
+    .gallery-grid img {
+      flex: 0 0 auto;
+      width: 250px;
+      border-radius: 10px;
+      cursor: pointer;
+      scroll-snap-align: start;
+      transition: transform 0.3s;
+      border: 2px solid #FFD700;
+      loading: lazy;
     }
-    .ppt-viewer {
-      width: 100%;
-      height: 500px;
+
+    .gallery-grid img:hover {
+      transform: scale(1.05);
+    }
+
+    .gallery-grid::-webkit-scrollbar {
+      height: 8px;
+    }
+    .gallery-grid::-webkit-scrollbar-track {
+      background: #333;
+      border-radius: 4px;
+    }
+    .gallery-grid::-webkit-scrollbar-thumb {
+      background: #FFD700;
+      border-radius: 4px;
+    }
+
+    .lightbox {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      flex-direction: column;
+    }
+
+    .lightbox img {
+      max-width: 90%;
+      max-height: 80vh;
+      border-radius: 10px;
+    }
+
+    .lightbox .close, .lightbox .prev, .lightbox .next {
+      position: absolute;
+      font-size: 30px;
+      color: #FFD700;
+      background: none;
       border: none;
+      cursor: pointer;
+      font-weight: bold;
     }
+
+    .lightbox .close { top: 20px; right: 30px; }
+    .lightbox .prev { left: 30px; top: 50%; transform: translateY(-50%); }
+    .lightbox .next { right: 30px; top: 50%; transform: translateY(-50%); }
+
     @media (max-width: 768px) {
-      h1 { font-size: 1.8rem; }
-      .ppt-viewer { height: 400px; }
+      iframe.pdf-viewer { height: 250px; }
+      .home-btn { top: 10px; left: 10px; padding: 8px 14px; font-size: 14px; }
+      h1 { font-size: 1.5em; margin-top: 60px; }
+      .project-img { max-height: 220px; }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <a class="back-button" href="index.html">← Back to Home</a>
-    <h1>Commercial building</h1>
 
-    <div class="media-grid">
-      <!-- 20 images -->
-      <img src="project{num}_img1.webp" alt="Image 1">
-<img src="project{num}_img2.webp" alt="Image 2">
-<img src="project{num}_img3.webp" alt="Image 3">
-<img src="project{num}_img4.webp" alt="Image 4">
-<img src="project{num}_img5.webp" alt="Image 5">
-<img src="project{num}_img6.webp" alt="Image 6">
-<img src="project{num}_img7.webp" alt="Image 7">
-<img src="project{num}_img8.webp" alt="Image 8">
-<img src="project{num}_img9.webp" alt="Image 9">
-<img src="project{num}_img10.webp" alt="Image 10">
-<img src="project{num}_img11.webp" alt="Image 11">
-<img src="project{num}_img12.webp" alt="Image 12">
-<img src="project{num}_img13.webp" alt="Image 13">
-<img src="project{num}_img14.webp" alt="Image 14">
-<img src="project{num}_img15.webp" alt="Image 15">
-<img src="project{num}_img16.webp" alt="Image 16">
-<img src="project{num}_img17.webp" alt="Image 17">
-<img src="project{num}_img18.webp" alt="Image 18">
-<img src="project{num}_img19.webp" alt="Image 19">
-<img src="project{num}_img20.webp" alt="Image 20">
-      <!-- 1 video -->
-      <video src="project6_video.mp4" controls></video>
+  <a href="index.html" class="home-btn">← Home</a>
+
+  <div class="container">
+    <h1>Commercial Building</h1>
+
+    <img src="cover-project6.webp" alt="Commercial Building Schematic" class="project-img" />
+
+    <div class="section article">
+      <h2>📑 Project Description</h2>
+      <p><!-- 🟡 اكتب المقالة هنا لاحقًا --></p>
     </div>
 
-    <h2 style="color:#FFD700; margin-bottom:15px;">Project Presentation</h2>
-    <iframe class="ppt-viewer" src="project6_slides.pdf"></iframe>
+    <div class="section">
+      <h2>📷 Image Gallery</h2>
+      <div class="gallery-grid">
+        <!-- 25 صورة -->
+        <script>
+          for (let i = 1; i <= 25; i++) {
+            document.write(`<img src="gallery5-${i}.webp" onclick="openLightbox(${i - 1})" loading="lazy">`);
+          }
+        </script>
+      </div>
+      <div class="lightbox" onclick="closeLightbox()">
+        <button class="close">✖</button>
+        <button class="prev" onclick="event.stopPropagation(); changeImage(-1)">❮</button>
+        <img id="lightbox-img" src="" />
+        <button class="next" onclick="event.stopPropagation(); changeImage(1)">❯</button>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>📄 Presentation</h2>
+      <iframe class="pdf-viewer" src="https://drive.google.com/file/d/your-presentation-link/preview"></iframe>
+    </div>
+
+    <div class="section">
+      <h2>🛠️ Some Individual Tasks</h2>
+      <iframe class="pdf-viewer" src="https://drive.google.com/file/d/your-individual-tasks-link/preview"></iframe>
+    </div>
   </div>
+
+  <script>
+    const images = Array.from({length: 25}, (_, i) => `gallery5-${i + 1}.webp`);
+    let current = 0;
+
+    function openLightbox(index) {
+      current = index;
+      document.getElementById('lightbox-img').src = images[current];
+      document.querySelector('.lightbox').style.display = 'flex';
+    }
+
+    function closeLightbox() {
+      document.querySelector('.lightbox').style.display = 'none';
+    }
+
+    function changeImage(step) {
+      current = (current + step + images.length) % images.length;
+      document.getElementById('lightbox-img').src = images[current];
+    }
+
+    document.addEventListener('keydown', function(e) {
+      if (document.querySelector('.lightbox').style.display === 'flex') {
+        if (e.key === 'ArrowRight') changeImage(1);
+        if (e.key === 'ArrowLeft') changeImage(-1);
+        if (e.key === 'Escape') closeLightbox();
+      }
+    });
+
+    let touchStartX = 0;
+    let touchEndX = 0;
+    const lightbox = document.querySelector('.lightbox');
+
+    lightbox.addEventListener('touchstart', function(e) {
+      touchStartX = e.changedTouches[0].screenX;
+    });
+
+    lightbox.addEventListener('touchend', function(e) {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+    });
+
+    function handleSwipe() {
+      if (touchEndX < touchStartX - 50) changeImage(1);
+      if (touchEndX > touchStartX + 50) changeImage(-1);
+    }
+  </script>
 </body>
 </html>
