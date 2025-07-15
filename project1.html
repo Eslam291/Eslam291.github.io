@@ -12,6 +12,20 @@
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
   body { background: #111; color: #fff; line-height: 1.6; }
+
+     .project-img {
+  display: block;
+  margin: 30px auto;
+  width: auto;
+  max-width: 90%;
+  height: auto;
+  max-height: 400px;
+  object-fit: contain;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+  border: 4px solid #FFD700;
+}
+
   .container { max-width: 1000px; margin: auto; padding: 20px; }
   h1 {
     color: #FFD700;
@@ -134,7 +148,7 @@
 
   <div class="container">
     <h1>Packing and Detect Defective Product Machine</h1>
-
+<img src="Project1cover.webp" alt="Project Cover" class="project-img"/>
     <div class="section">
       <h2>Overview</h2>
       <p>This project involves the design and implementation of an automated machine that detects defective products through a multi-stage inspection process. The system ensures that only products meeting the required quality standards proceed to packaging and labeling.</p>
@@ -188,7 +202,8 @@
     </div>
   </div>
 
-  <div class="lightbox" id="lightbox">
+  <div class="lightbox" id="lightbox" onclick="if(event.target === this) closeLightbox()">
+    
     <span class="close-btn" onclick="closeLightbox()">✖</span>
     <span class="nav-arrow left" onclick="prevImage()">⟨</span>
     <img id="lightbox-img" src="" alt="Large Preview">
