@@ -220,11 +220,15 @@
       }
     });
 
-    window.addEventListener('popstate', function (event) {
-  if (lightbox.style.display === 'flex') {
+window.addEventListener('popstate', function (event) {
+  const lightbox = document.querySelector('.lightbox');
+  if (event.state && event.state.lightboxOpen) {
+    // Just close the lightbox and stay on the same page
     closeLightbox();
+    history.replaceState(null, ''); // Prevent going back again
   }
 });
+
 
   </script>
 </body>
