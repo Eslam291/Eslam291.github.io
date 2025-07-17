@@ -248,6 +248,7 @@
   function changeImage(step) {
     current = (current + step + images.length) % images.length;
     document.getElementById('lightbox-img').src = images[current];
+       history.pushState({ lightboxOpen: true }, '');
   }
 
   document.addEventListener('keydown', function(e) {
