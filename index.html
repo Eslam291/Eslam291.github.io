@@ -36,7 +36,6 @@
       height: 40px;
       width: 40px;
       transition: transform 0.3s ease;
-      loading: lazy;
     }
     .icon-btn img:hover {
       transform: scale(1.1);
@@ -121,13 +120,24 @@
       width: 100%;
       height: 180px;
       object-fit: cover;
-      loading: lazy;
     }
 
     .project-card h3 {
       padding: 15px;
       font-size: 1.1rem;
       background: #222;
+    }
+
+    @media (max-width: 600px) {
+      .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 400px) {
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
     }
 
     @media (max-width: 600px) {
@@ -152,19 +162,32 @@
 
   <!-- ====== TOP BUTTONS ====== -->
   <div class="top-buttons">
-    <a href="cv.html" class="icon-btn"><img src="cv.webp" alt="CV" /></a>
-    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=eslamsayed1936@gmail.com" target="_blank" class="icon-btn"><img src="gmail.webp" alt="Gmail" /></a>
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLSftAq3t36DVvreXexTf2Z6kazL8gCCEAEW0kdBn71ex6ySFKw/viewform?usp=header" target="_blank" class="icon-btn"><img src="form.webp" alt="Form" /></a>
-    <a href="https://linkedin.com/in/eslam-sayed-065958343" target="_blank" class="icon-btn"><img src="linkedin.webp" alt="LinkedIn" /></a>
-    <a href="https://wa.me/201285709125" target="_blank" class="icon-btn"><img src="whatsapp.webp" alt="WhatsApp" /></a>
+    <a href="cv.html" class="icon-btn"><img src="cv.webp" alt="CV" loading="lazy" /></a>
+    <a href="#" onclick="openEmail();" class="icon-btn">
+      <img src="gmail.webp" alt="Gmail" loading="lazy" />
+    </a>
 
+    <script>
+      function openEmail() {
+        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+        if (isMobile) {
+          window.location.href = 'mailto:eslamsayed1936@gmail.com';
+        } else {
+          window.open('https://mail.google.com/mail/?view=cm&fs=1&to=eslamsayed1936@gmail.com', '_blank');
+        }
+      }
+    </script>
+
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSftAq3t36DVvreXexTf2Z6kazL8gCCEAEW0kdBn71ex6ySFKw/viewform?usp=header" target="_blank" class="icon-btn"><img src="form.webp" alt="Form" loading="lazy" /></a>
+    <a href="https://linkedin.com/in/eslam-sayed-065958343" target="_blank" class="icon-btn"><img src="linkedin.webp" alt="LinkedIn" loading="lazy" /></a>
+    <a href="https://wa.me/201285709125" target="_blank" class="icon-btn"><img src="whatsapp.webp" alt="WhatsApp" loading="lazy" /></a>
   </div>
 
   <!-- ====== HEADER ====== -->
   <header>
     <div class="header-flex">
       <h1>Eslam Sayed</h1>
-      <img src="profile.webp" alt="Profile Picture" class="profile-img" />
+      <img src="profile.webp" alt="Profile Picture" class="profile-img" loading="lazy" />
     </div>
     <p class="about-text">
       Dynamic Electrical Power and Control Engineer with hands-on experience in LV distribution and
@@ -180,10 +203,10 @@
   <section>
     <h2>Industrial Automation Projects</h2>
     <div class="projects-grid">
-      <a href="project1.html" class="project-card"><img src="cover-project1.webp" alt=""><h3>Packing and Detect Defective Product Machine</h3></a>
-      <a href="project2.html" class="project-card"><img src="cover-project2.webp" alt=""><h3>Paint Mixing Machine</h3></a>
-      <a href="project3.html" class="project-card"><img src="cover-project3.webp" alt=""><h3>Smart Water Pumping Station</h3></a>
-      <a href="project4.html" class="project-card"><img src="cover-project4.webp" alt=""><h3>Alternating Submersible Pumps</h3></a>
+      <a href="project1.html" class="project-card"><img src="cover-project1.webp" alt="" loading="lazy"><h3>Packing and Detect Defective Product Machine</h3></a>
+      <a href="project2.html" class="project-card"><img src="cover-project2.webp" alt="" loading="lazy"><h3>Paint Mixing Machine</h3></a>
+      <a href="project3.html" class="project-card"><img src="cover-project3.webp" alt="" loading="lazy"><h3>Smart Water Pumping Station</h3></a>
+      <a href="project4.html" class="project-card"><img src="cover-project4.webp" alt="" loading="lazy"><h3>Alternating Submersible Pumps</h3></a>
     </div>
   </section>
 
@@ -191,12 +214,11 @@
   <section>
     <h2>Power Distribution Projects</h2>
     <div class="projects-grid">
-      <a href="project5.html" class="project-card"><img src="cover-project5.webp" alt=""><h3>Project 1</h3></a>
-      <a href="project6.html" class="project-card"><img src="cover-project6.webp" alt=""><h3>Project 2</h3></a>
-      <a href="project7.html" class="project-card"><img src="cover-project7.webp" alt=""><h3>Project 3</h3></a>
+      <a href="project5.html" class="project-card"><img src="cover-project5.webp" alt="" loading="lazy"><h3>Project 1</h3></a>
+      <a href="project6.html" class="project-card"><img src="cover-project6.webp" alt="" loading="lazy"><h3>Project 2</h3></a>
+      <a href="project7.html" class="project-card"><img src="cover-project7.webp" alt="" loading="lazy"><h3>Project 3</h3></a>
     </div>
   </section>
 
 </body>
 </html>
-

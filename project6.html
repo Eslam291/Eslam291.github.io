@@ -14,18 +14,19 @@
     h2, h3 { color: #FFD700; margin: 30px 0 15px; }
 
     .section { margin-bottom: 40px; }
-       .project-img {
-  display: block;
-  margin: 30px auto;
-  width: auto;
-  max-width: 90%;
-  height: auto;
-  max-height: 400px;
-  object-fit: contain;
-  border-radius: 10px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-  border: 4px solid #FFD700;
-}
+
+    .project-img {
+      display: block;
+      margin: 30px auto;
+      width: auto;
+      max-width: 90%;
+      height: auto;
+      max-height: 400px;
+      object-fit: contain;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+      border: 4px solid #FFD700;
+    }
 
     iframe.pdf-viewer {
       width: 100%;
@@ -68,7 +69,6 @@
       scroll-snap-align: start;
       transition: transform 0.3s;
       border: 2px solid #FFD700;
-      loading: lazy;
     }
 
     .gallery-grid img:hover {
@@ -129,91 +129,136 @@
 </head>
 <body>
 
-  <a href="index.html" class="home-btn">← Home</a>
+<a href="index.html" class="home-btn">← Home</a>
 
-  <div class="container">
-    <h1>Commercial Building</h1>
+<div class="container">
+  <h1>Commercial Building</h1>
+  <img src="cover-project6.webp" alt="Commercial Building Schematic" class="project-img" />
 
-    <img src="cover-project6.webp" alt="Commercial Building Schematic" class="project-img" />
+  <div class="section article">
+    <h2>📑 Project Description</h2>
 
-    <div class="section article">
-      <h2>📑 Project Description</h2>
-      <p><!-- 🟡 اكتب المقالة هنا لاحقًا --></p>
-    </div>
+    <h3>Project Overview</h3>
+    <p>This project involved the complete electrical design of a commercial building consisting of a ground floor, two upper floors, and a roof. The system design adhered strictly to the Egyptian code, ensuring proper lighting distribution, safety, and load management.</p>
 
-    <div class="section">
-      <h2>📷 Image Gallery</h2>
-      <div class="gallery-grid">
-        <!-- 25 صورة -->
-        <script>
-          for (let i = 1; i <= 25; i++) {
-            document.write(`<img src="gallery5-${i}.webp" onclick="openLightbox(${i - 1})" loading="lazy">`);
-          }
-        </script>
-      </div>
-      <div class="lightbox" onclick="closeLightbox()">
-        <button class="close">✖</button>
-        <button class="prev" onclick="event.stopPropagation(); changeImage(-1)">❮</button>
-        <img id="lightbox-img" src="" />
-        <button class="next" onclick="event.stopPropagation(); changeImage(1)">❯</button>
-      </div>
-    </div>
+    <h3>My Role</h3>
+    <p>My personal contribution to the team project was handling the entire lighting design process. This included the initial lighting simulation using DIALux Evo, laying out the lighting on AutoCAD, connecting lighting circuits, preparing panel schedules specific to lighting, and creating the final shop drawings. I also classified lighting loads into Normal and Emergency categories.</p>
 
-    <div class="section">
-      <h2>📄 Presentation</h2>
-      <iframe class="pdf-viewer" src="https://drive.google.com/file/d/your-presentation-link/preview"></iframe>
-    </div>
+    <h3>Lighting Design</h3>
+    <p>Lighting fixtures were selected based on room usage and classified into Normal and Emergency loads. DIALux Evo software was used to perform accurate lighting simulations, ensuring proper illumination levels in all areas and full compliance with the Egyptian Electrical Code.</p>
 
-    <div class="section">
-      <h2>🛠️ Some Individual Tasks</h2>
-      <iframe class="pdf-viewer" src="https://drive.google.com/file/d/your-individual-tasks-link/preview"></iframe>
+    <p>Types of Fixtures Used:</p>
+    <ul>
+      <li>60x60 Surface Mounted</li>
+      <li>Circular LED (IP20/IP44)</li>
+      <li>Ceiling Mounted Linear LED Profile (IP44)</li>
+      <li>Wall Mounted Circular</li>
+      <li>Magnetic Track</li>
+      <li>Pendant LED Linear (IP44)</li>
+      <li>Circular Suspended LED</li>
+      <li>Wall Emergency LED for Stairs (IP44)</li>
+      <li>Exit Sign</li>
+    </ul>
+
+    <h3>Lighting Distribution</h3>
+    <p>After simulation, lighting was distributed and documented on AutoCAD. Each floor had a separate lighting panel, and circuits were connected appropriately. Lighting schedules were created, and circuit protection was applied based on Egyptian standards.</p>
+
+    <h3>Tools Used</h3>
+    <ul>
+      <li>DIALux Evo for lighting simulation</li>
+      <li>AutoCAD for layout and shop drawings</li>
+    </ul>
+  </div>
+
+  <!-- === Dialux Images === -->
+  <div class="section">
+    <h2>💡 Dialux Evo Pics</h2>
+    <div class="gallery-grid">
+      <img src="dialux-1.webp" alt=""><!-- 🟡 لو عاوز تزود: انسخ السطر ده وعدّل الرقم -->
+      <img src="dialux-2.webp" alt="">
+      <img src="dialux-3.webp" alt="">
+      <img src="dialux-4.webp" alt="">
+      <img src="dialux-5.webp" alt="">
     </div>
   </div>
 
-  <script>
-    const images = Array.from({length: 25}, (_, i) => `gallery5-${i + 1}.webp`);
-    let current = 0;
+  <!-- === Design Plans === -->
+  <div class="section">
+    <h2>📐 Design Plans</h2>
+    <div class="gallery-grid">
+      <img src="design-1.webp" alt=""><!-- 🟡 لو عاوز تزود: انسخ السطر ده وعدّل الرقم -->
+      <img src="design-2.webp" alt="">
+      <img src="design-3.webp" alt="">
+      <img src="design-4.webp" alt="">
+      <img src="design-5.webp" alt="">
+    </div>
+  </div>
 
-    function openLightbox(index) {
-      current = index;
-      document.getElementById('lightbox-img').src = images[current];
-      document.querySelector('.lightbox').style.display = 'flex';
+  <!-- === Shop Drawing Plans === -->
+  <div class="section">
+    <h2>🧾 Shop Drawing Plans</h2>
+    <div class="gallery-grid">
+      <img src="shop-1.webp" alt=""><!-- 🟡 لو عاوز تزود: انسخ السطر ده وعدّل الرقم -->
+      <img src="shop-2.webp" alt="">
+      <img src="shop-3.webp" alt="">
+      <img src="shop-4.webp" alt="">
+      <img src="shop-5.webp" alt="">
+    </div>
+  </div>
+
+  <!-- === Presentation PDF === -->
+  <div class="section">
+    <h2>📄 Presentation</h2>
+<iframe src="https://drive.google.com/file/d/1eaEqFdpgetFAGUsaiU89X4t23vBW4CBR/preview" width="100%" height="600" allow="autoplay"></iframe>
+  </div>
+
+  <!-- === Individual Tasks PDF === -->
+  <div class="section">
+    <h2>🛠️ Some Individual Tasks</h2>
+    <iframe class="pdf-viewer" src="https://drive.google.com/file/d/1nETJ73KnQVlSdJVeGv3RIleGsDInJ0Fu/preview"></iframe>
+  </div>
+</div>
+
+<!-- Lightbox functionality -->
+<div class="lightbox" onclick="closeLightbox()">
+  <button class="close">✖</button>
+  <button class="prev" onclick="event.stopPropagation(); changeImage(-1)">❮</button>
+  <img id="lightbox-img" src="" />
+  <button class="next" onclick="event.stopPropagation(); changeImage(1)">❯</button>
+</div>
+
+<script>
+  const images = [
+    'dialux-1.webp','dialux-2.webp','dialux-3.webp','dialux-4.webp','dialux-5.webp',
+    'design-1.webp','design-2.webp','design-3.webp','design-4.webp','design-5.webp',
+    'shop-1.webp','shop-2.webp','shop-3.webp','shop-4.webp','shop-5.webp'
+  ];
+  let current = 0;
+
+  function openLightbox(index) {
+    current = index;
+    document.getElementById('lightbox-img').src = images[current];
+    document.querySelector('.lightbox').style.display = 'flex';
+  }
+
+  function closeLightbox() {
+    document.querySelector('.lightbox').style.display = 'none';
+  }
+
+  function changeImage(step) {
+    current = (current + step + images.length) % images.length;
+    document.getElementById('lightbox-img').src = images[current];
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (document.querySelector('.lightbox').style.display === 'flex') {
+      if (e.key === 'ArrowRight') changeImage(1);
+      if (e.key === 'ArrowLeft') changeImage(-1);
+      if (e.key === 'Escape') closeLightbox();
     }
+  });
 
-    function closeLightbox() {
-      document.querySelector('.lightbox').style.display = 'none';
-    }
-
-    function changeImage(step) {
-      current = (current + step + images.length) % images.length;
-      document.getElementById('lightbox-img').src = images[current];
-    }
-
-    document.addEventListener('keydown', function(e) {
-      if (document.querySelector('.lightbox').style.display === 'flex') {
-        if (e.key === 'ArrowRight') changeImage(1);
-        if (e.key === 'ArrowLeft') changeImage(-1);
-        if (e.key === 'Escape') closeLightbox();
-      }
-    });
-
-    let touchStartX = 0;
-    let touchEndX = 0;
-    const lightbox = document.querySelector('.lightbox');
-
-    lightbox.addEventListener('touchstart', function(e) {
-      touchStartX = e.changedTouches[0].screenX;
-    });
-
-    lightbox.addEventListener('touchend', function(e) {
-      touchEndX = e.changedTouches[0].screenX;
-      handleSwipe();
-    });
-
-    function handleSwipe() {
-      if (touchEndX < touchStartX - 50) changeImage(1);
-      if (touchEndX > touchStartX + 50) changeImage(-1);
-    }
-  </script>
+ 
+</script>
 </body>
 </html>
