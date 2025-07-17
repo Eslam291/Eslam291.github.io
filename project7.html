@@ -185,6 +185,10 @@
   <script>
     const images = Array.from({ length: 16 }, (_, i) => `gallery5-${i + 1}.webp`);
     let current = 0;
+    let lightboxIsOpen = false; // نتابع حالة الفتح
+    const lightbox = document.querySelector('.lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+
 
     const galleryContainer = document.getElementById("gallery-container");
     images.forEach((src, i) => {
@@ -196,16 +200,25 @@
       galleryContainer.appendChild(img);
     });
 
-    function openLightbox(index) {
-      current = index;
-      document.getElementById('lightbox-img').src = images[current];
-      document.querySelector('.lightbox').style.display = 'flex';
-      history.pushState({ lightboxOpen: true }, '');
-    }
+function openLightbox(index) {
+  current = index;
+  lightboxImg.src = images[current];
+  lightbox.style.display = 'flex';
 
-    function closeLightbox() {
-      document.querySelector('.lightbox').style.display = 'none';
-    }
+  history.pushState({ lightboxOpen: true }, '');
+  lightboxIsOpen = true;
+}
+
+
+ function closeLightbox() {
+  lightbox.style.display = 'none';
+  lightboxIsOpen = false;
+
+  if (history.state && history.state.lightboxOpen) {
+    history.back();
+  }
+}
+
 
     function changeImage(step) {
       current = (current + step + images.length) % images.length;
@@ -220,12 +233,11 @@
       }
     });
 
-window.addEventListener('popstate', function (event) {
-  const lightbox = document.querySelector('.lightbox');
-  if (event.state && event.state.lightboxOpen) {
-    // Just close the lightbox and stay on the same page
+ 
+
+window.addEventListener('popstate', function () {
+  if (lightboxIsOpen) {
     closeLightbox();
-    history.replaceState(null, ''); // Prevent going back again
   }
 });
 

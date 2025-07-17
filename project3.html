@@ -290,16 +290,21 @@
     ];
     let current = 0;
 
-    function openLightbox(index) {
-      current = index;
-      document.getElementById('lightbox-img').src = images[current];
-      document.querySelector('.lightbox').style.display = 'flex';
-       history.pushState({ lightboxOpen: true }, '');
-    }
+function openLightbox(index) {
+  current = index;
+  document.getElementById('lightbox-img').src = images[current];
+  document.querySelector('.lightbox').style.display = 'flex';
+  history.pushState({ lightbox: true }, ''); // ✅ إضافة لزر الباك
+}
 
-    function closeLightbox() {
-      document.querySelector('.lightbox').style.display = 'none';
-    }
+
+function closeLightbox() {
+  document.querySelector('.lightbox').style.display = 'none';
+  if (history.state && history.state.lightbox) {
+    history.back(); // ✅ نرجع لورا في السجل
+  }
+}
+
 
     function changeImage(step) {
       current = (current + step + images.length) % images.length;
@@ -315,11 +320,8 @@
     });
 
 window.addEventListener('popstate', function (event) {
-  const lightbox = document.querySelector('.lightbox');
-  if (event.state && event.state.lightboxOpen) {
-    // Just close the lightbox and stay on the same page
-    closeLightbox();
-    history.replaceState(null, ''); // Prevent going back again
+  if (document.querySelector('.lightbox').style.display === 'flex') {
+    document.querySelector('.lightbox').style.display = 'none';
   }
 });
 
