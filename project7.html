@@ -15,18 +15,18 @@
 
     .section { margin-bottom: 40px; }
 
-  .project-img {
-  display: block;
-  margin: 30px auto;
-  width: auto;
-  max-width: 90%;
-  height: auto;
-  max-height: 400px;
-  object-fit: contain;
-  border-radius: 10px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-  border: 4px solid #FFD700;
-}
+    .project-img {
+      display: block;
+      margin: 30px auto;
+      width: auto;
+      max-width: 90%;
+      height: auto;
+      max-height: 400px;
+      object-fit: contain;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+      border: 4px solid #FFD700;
+    }
 
     iframe.pdf-viewer {
       width: 100%;
@@ -69,7 +69,6 @@
       scroll-snap-align: start;
       transition: transform 0.3s;
       border: 2px solid #FFD700;
-      loading: lazy;
     }
 
     .gallery-grid img:hover {
@@ -139,18 +138,35 @@
 
     <div class="section article">
       <h2>📑 Project Description</h2>
-      <p><!-- 🟡 اكتب المقالة هنا لاحقًا --></p>
+
+      <h3>Project Overview</h3>
+      <p>This is a lighting design project for a commercial building consisting of a ground floor, five typical floors, and a roof. The lighting simulation and layout were fully completed using DIALux Evo, in compliance with the Egyptian Code.</p>
+
+      <h3>Lighting Design Stage</h3>
+      <p>The design covers all floors and includes both normal and emergency lighting fixtures. Fixtures were carefully selected based on functionality and interior aesthetics, and include:</p>
+      <ul>
+        <li>60x60 LED panels</li>
+        <li>Circular spotlights</li>
+        <li>LED profiles</li>
+        <li>Pendant fixtures</li>
+        <li>Surface-mounted lights</li>
+        <li>Decorative chandeliers</li>
+      </ul>
+      <p>Simulation results were optimized for lux levels and energy efficiency, forming a solid foundation for future load calculation and layout detailing.</p>
+
+      <h3>Software Used</h3>
+      <ul>
+        <li>DIALux Evo – For lighting simulation and documentation</li>
+      </ul>
+
+      <h3>Status</h3>
+      <p>The lighting system design is fully complete. Expansion into full MEP design (Power, HVAC, Fire Fighting, Low Current) is intended in later phases using Revit.</p>
     </div>
 
     <div class="section">
-      <h2>📷 Image Gallery</h2>
-      <div class="gallery-grid">
-        <!-- 25 صورة -->
-        <script>
-          for (let i = 1; i <= 25; i++) {
-            document.write(`<img src="gallery5-${i}.webp" onclick="openLightbox(${i - 1})" loading="lazy">`);
-          }
-        </script>
+      <h2>📷 Dialux Evo Pics</h2>
+      <div class="gallery-grid" id="gallery-container">
+        <!-- الصور هتتحط هنا تلقائي -->
       </div>
       <div class="lightbox" onclick="closeLightbox()">
         <button class="close">✖</button>
@@ -161,19 +177,24 @@
     </div>
 
     <div class="section">
-      <h2>📄 Presentation</h2>
-      <iframe class="pdf-viewer" src="https://drive.google.com/file/d/your-presentation-link/preview"></iframe>
-    </div>
-
-    <div class="section">
       <h2>🛠️ Some Individual Tasks</h2>
-      <iframe class="pdf-viewer" src="https://drive.google.com/file/d/your-individual-tasks-link/preview"></iframe>
+      <iframe class="pdf-viewer" src="https://drive.google.com/file/d/1nETJ73KnQVlSdJVeGv3RIleGsDInJ0Fu/preview"></iframe>
     </div>
   </div>
 
   <script>
-    const images = Array.from({length: 25}, (_, i) => `gallery5-${i + 1}.webp`);
+    const images = Array.from({ length: 16 }, (_, i) => `gallery5-${i + 1}.webp`);
     let current = 0;
+
+    const galleryContainer = document.getElementById("gallery-container");
+    images.forEach((src, i) => {
+      const img = document.createElement("img");
+      img.src = src;
+      img.alt = `Image ${i + 1}`;
+      img.loading = "lazy";
+      img.onclick = () => openLightbox(i);
+      galleryContainer.appendChild(img);
+    });
 
     function openLightbox(index) {
       current = index;
@@ -197,24 +218,6 @@
         if (e.key === 'Escape') closeLightbox();
       }
     });
-
-    let touchStartX = 0;
-    let touchEndX = 0;
-    const lightbox = document.querySelector('.lightbox');
-
-    lightbox.addEventListener('touchstart', function(e) {
-      touchStartX = e.changedTouches[0].screenX;
-    });
-
-    lightbox.addEventListener('touchend', function(e) {
-      touchEndX = e.changedTouches[0].screenX;
-      handleSwipe();
-    });
-
-    function handleSwipe() {
-      if (touchEndX < touchStartX - 50) changeImage(1);
-      if (touchEndX > touchStartX + 50) changeImage(-1);
-    }
   </script>
 </body>
 </html>
