@@ -82,7 +82,7 @@
       color: #FFD700;
     }
 
-    /* ✅ تعديل الجاليري للعرض بشكل سلايدر */
+   
     .gallery-grid {
       display: flex;
       overflow-x: auto;
@@ -294,6 +294,7 @@
       current = index;
       document.getElementById('lightbox-img').src = images[current];
       document.querySelector('.lightbox').style.display = 'flex';
+       history.pushState({ lightboxOpen: true }, '');
     }
 
     function closeLightbox() {
@@ -313,6 +314,11 @@
       }
     });
 
+    window.addEventListener('popstate', function (event) {
+  if (lightbox.style.display === 'flex') {
+    closeLightbox();
+  }
+});
   
   </script>
 </body>

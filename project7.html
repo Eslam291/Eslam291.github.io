@@ -218,6 +218,13 @@
         if (e.key === 'Escape') closeLightbox();
       }
     });
+
+    window.addEventListener('popstate', function (event) {
+  if (lightbox.style.display === 'flex') {
+    closeLightbox();
+  }
+});
+
   </script>
 </body>
 </html>
