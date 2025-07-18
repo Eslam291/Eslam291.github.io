@@ -134,7 +134,7 @@
   <div class="container">
     <h1>Commercial Building</h1>
 
-    <img src="cover-project7.webp" alt="Commercial Building Schematic" class="project-img" />
+    <img src="cover-project7.webp" alt="Commercial Building Schematic" class="project-img"loading="eager">
 
     <div class="section article">
       <h2>📑 Project Description</h2>
@@ -185,7 +185,7 @@
   <script>
     const images = Array.from({ length: 16 }, (_, i) => `gallery5-${i + 1}.webp`);
     let current = 0;
-    let lightboxIsOpen = false; // نتابع حالة الفتح
+    let lightboxIsOpen = false; 
     const lightbox = document.querySelector('.lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
 
@@ -195,7 +195,8 @@
       const img = document.createElement("img");
       img.src = src;
       img.alt = `Image ${i + 1}`;
-      img.loading = "lazy";
+      img.loading = "eager";
+      img.decoding = "async";
       img.onclick = () => openLightbox(i);
       galleryContainer.appendChild(img);
     });
@@ -210,13 +211,18 @@ function openLightbox(index) {
 }
 
 
- function closeLightbox() {
+function closeLightbox() {
   lightbox.style.display = 'none';
   lightboxIsOpen = false;
 
   if (history.state && history.state.lightboxOpen) {
     history.back();
   }
+  setTimeout(() => {
+    if (!lightboxIsOpen && history.state && history.state.lightboxOpen) {
+      history.replaceState(null, '');
+    }
+  }, 100);
 }
 
 

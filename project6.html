@@ -134,7 +134,7 @@
 
 <div class="container">
   <h1>Commercial Building</h1>
-  <img src="cover-project6.webp" alt="Commercial Building Schematic" class="project-img" />
+  <img src="cover-project6.webp" alt="Commercial Building Schematic" class="project-img"loading="eager">
 
   <div class="section article">
     <h2>📑 Project Description</h2>
@@ -260,14 +260,20 @@ const lightboxImg = document.getElementById('lightbox-img');
 }
 
 
- function closeLightbox() {
+function closeLightbox() {
   lightbox.style.display = 'none';
   lightboxIsOpen = false;
 
   if (history.state && history.state.lightboxOpen) {
     history.back();
   }
+  setTimeout(() => {
+    if (!lightboxIsOpen && history.state && history.state.lightboxOpen) {
+      history.replaceState(null, '');
+    }
+  }, 100);
 }
+
 
 
   function changeImage(step) {

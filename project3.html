@@ -191,7 +191,7 @@
   <div class="container">
     <h1>Smart Water Pumping Station</h1>
 
-    <img src="cover-project3.webp" alt="Water Station Schematic" class="project-img" />
+    <img src="cover-project3.webp" alt="Water Station Schematic" class="project-img"loading="eager">
 
     <div class="section article">
       <h2>🚰 Water Pumping Station Control System</h2>
@@ -253,15 +253,15 @@
     <div class="section">
       <h2>📷 Image Gallery</h2>
       <div class="gallery-grid">
-        <img src="gallery3-1.webp" onclick="openLightbox(0)">
-        <img src="gallery3-2.webp" onclick="openLightbox(1)">
-        <img src="gallery3-3.webp" onclick="openLightbox(2)">
-        <img src="gallery3-4.webp" onclick="openLightbox(3)">
-        <img src="gallery3-5.webp" onclick="openLightbox(4)">
-        <img src="gallery3-6.webp" onclick="openLightbox(5)">
-        <img src="gallery3-7.webp" onclick="openLightbox(6)">
-        <img src="gallery3-8.webp" onclick="openLightbox(7)">
-        <img src="gallery3-9.webp" onclick="openLightbox(8)">
+        <img src="gallery3-1.webp" onclick="openLightbox(0)"loading="eager">
+        <img src="gallery3-2.webp" onclick="openLightbox(1)"loading="eager">
+        <img src="gallery3-3.webp" onclick="openLightbox(2)"loading="eager">
+        <img src="gallery3-4.webp" onclick="openLightbox(3)"loading="eager">
+        <img src="gallery3-5.webp" onclick="openLightbox(4)"loading="eager">
+        <img src="gallery3-6.webp" onclick="openLightbox(5)"loading="eager">
+        <img src="gallery3-7.webp" onclick="openLightbox(6)"loading="eager">
+        <img src="gallery3-8.webp" onclick="openLightbox(7)"loading="eager">
+        <img src="gallery3-9.webp" onclick="openLightbox(8)"loading="eager">
       </div>
       <div class="lightbox" onclick="closeLightbox()">
         <button class="close">✖</button>
@@ -294,15 +294,22 @@ function openLightbox(index) {
   current = index;
   document.getElementById('lightbox-img').src = images[current];
   document.querySelector('.lightbox').style.display = 'flex';
-  history.pushState({ lightbox: true }, ''); // ✅ إضافة لزر الباك
+  history.pushState({ lightbox: true }, ''); 
 }
 
 
 function closeLightbox() {
-  document.querySelector('.lightbox').style.display = 'none';
-  if (history.state && history.state.lightbox) {
-    history.back(); // ✅ نرجع لورا في السجل
+  lightbox.style.display = 'none';
+  lightboxIsOpen = false;
+
+  if (history.state && history.state.lightboxOpen) {
+    history.back();
   }
+  setTimeout(() => {
+    if (!lightboxIsOpen && history.state && history.state.lightboxOpen) {
+      history.replaceState(null, '');
+    }
+  }, 100);
 }
 
 

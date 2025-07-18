@@ -135,7 +135,7 @@
   <div class="container">
     <h1>Alternating Submersible Pumps</h1>
 
-    <img src="cover-project4.webp" alt="Pump Control Schematic" class="project-img" />
+    <img src="cover-project4.webp" alt="Pump Control Schematic" class="project-img"loading="eager">
 
     <div class="section article">
       <h2>💡 Project Overview</h2>
@@ -236,14 +236,21 @@
   current = index;
   document.getElementById('lightbox-img').src = images[current];
   document.querySelector('.lightbox').style.display = 'flex';
-  history.pushState({ lightbox: true }, ''); // ✅ إضافة لزر الباك
+  history.pushState({ lightbox: true }, ''); 
 }
 
 function closeLightbox() {
-  document.querySelector('.lightbox').style.display = 'none';
-  if (history.state && history.state.lightbox) {
-    history.back(); // ✅ نرجع لورا في السجل
+  lightbox.style.display = 'none';
+  lightboxIsOpen = false;
+
+  if (history.state && history.state.lightboxOpen) {
+    history.back();
   }
+  setTimeout(() => {
+    if (!lightboxIsOpen && history.state && history.state.lightboxOpen) {
+      history.replaceState(null, '');
+    }
+  }, 100);
 }
 
     function changeImage(step) {
