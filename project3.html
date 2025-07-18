@@ -103,7 +103,9 @@
     }
 
     .gallery-grid img:hover {
-      transform: scale(1.05);
+   transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(241, 196, 15, 0.4);
+
     }
 
 .gallery-grid::-webkit-scrollbar {
@@ -166,13 +168,15 @@
 
     @media (max-width: 768px) {
       iframe.pdf-viewer, iframe.video { height: 250px; }
-
+    
       .home-btn {
         top: 10px !important;
         left: 10px !important;
         padding: 8px 14px !important;
         font-size: 14px !important;
       }
+
+
 
       h1 {
         font-size: 1.5em;
@@ -183,6 +187,11 @@
         max-height: 220px;
       }
     }
+            .home-btn:hover {
+    background: #e6c200;
+      transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(241, 196, 15, 0.4);
+  }
   </style>
 </head>
 <body>
@@ -290,13 +299,19 @@
     ];
     let current = 0;
 
+const lightbox = document.querySelector('.lightbox');
+let lightboxIsOpen = false;
+document.getElementById('lightbox-img').addEventListener('click', function(e) {
+  e.stopPropagation();
+});
+
 function openLightbox(index) {
   current = index;
   document.getElementById('lightbox-img').src = images[current];
-  document.querySelector('.lightbox').style.display = 'flex';
-  history.pushState({ lightbox: true }, ''); 
+  lightbox.style.display = 'flex';
+  lightboxIsOpen = true;
+  history.pushState({ lightboxOpen: true }, '');
 }
-
 
 function closeLightbox() {
   lightbox.style.display = 'none';
@@ -311,6 +326,7 @@ function closeLightbox() {
     }
   }, 100);
 }
+
 
 
     function changeImage(step) {

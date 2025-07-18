@@ -47,7 +47,11 @@
       text-decoration: none;
       z-index: 10000;
     }
-
+  .home-btn:hover {
+    background: #e6c200;
+      transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(241, 196, 15, 0.4);
+  }
     .article p { margin-bottom: 15px; }
     .article h3 { color: #FFD700; }
 
@@ -78,8 +82,11 @@
 
 
     .gallery-grid img:hover {
-      transform: scale(1.05);
-    }
+    background: #e6c200;
+      transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(241, 196, 15, 0.4);
+  }
+    
 
     .gallery-grid::-webkit-scrollbar {
       height: 8px;
@@ -312,7 +319,7 @@
     </div>
   </div>
 
-  <script>
+ <script>
 const images = [
   'light-1.webp','light-2.webp','light-3.webp','light-4.webp','light-5.webp','light-6.webp','light-7.webp','light-8.webp',
   'plan-1.webp','plan-2.webp','plan-3.webp','plan-4.webp','plan-5.webp','plan-6.webp','plan-7.webp','plan-8.webp','plan-9.webp','plan-10.webp','plan-11.webp','plan-12.webp',
@@ -323,51 +330,55 @@ const images = [
   'cctv-1.webp','cctv-2.webp','cctv-3.webp','cctv-4.webp'
 ];
 
-    let current = 0;
+let current = 0;
+let lightbox = document.querySelector('.lightbox');
+let lightboxImg = document.getElementById('lightbox-img');
 
-   function openLightbox(index) {
+function openLightbox(index) {
   current = index;
-  document.getElementById('lightbox-img').src = images[current];
-  document.querySelector('.lightbox').style.display = 'flex';
-  history.pushState({ lightbox: true }, ''); 
+  lightboxImg.src = images[current];
+  lightbox.style.display = 'flex';
+  history.pushState({ lightboxOpen: true }, '');
 }
-
 
 function closeLightbox() {
   lightbox.style.display = 'none';
-  lightboxIsOpen = false;
 
   if (history.state && history.state.lightboxOpen) {
     history.back();
   }
-  setTimeout(() => {
-    if (!lightboxIsOpen && history.state && history.state.lightboxOpen) {
-      history.replaceState(null, '');
-    }
-  }, 100);
 }
 
+function changeImage(step) {
+  current = (current + step + images.length) % images.length;
+  lightboxImg.src = images[current];
+}
 
-    function changeImage(step) {
-      current = (current + step + images.length) % images.length;
-      document.getElementById('lightbox-img').src = images[current];
-    }
-
-    document.addEventListener('keydown', function(e) {
-      if (document.querySelector('.lightbox').style.display === 'flex') {
-        if (e.key === 'ArrowRight') changeImage(1);
-        if (e.key === 'ArrowLeft') changeImage(-1);
-        if (e.key === 'Escape') closeLightbox();
-      }
-    });
-
-   window.addEventListener('popstate', function (event) {
-  if (document.querySelector('.lightbox').style.display === 'flex') {
-    document.querySelector('.lightbox').style.display = 'none';
+document.addEventListener('keydown', function(e) {
+  if (lightbox.style.display === 'flex') {
+    if (e.key === 'ArrowRight') changeImage(1);
+    if (e.key === 'ArrowLeft') changeImage(-1);
+    if (e.key === 'Escape') closeLightbox();
   }
 });
 
+window.addEventListener('popstate', function () {
+  if (lightbox.style.display === 'flex') {
+    closeLightbox();
+  }
+});
 
-  </script>
+document.querySelector('.lightbox .close').addEventListener('click', function(e) {
+  e.stopPropagation();
+  closeLightbox();
+});
+
+lightbox.addEventListener('click', function(e) {
+  if (e.target === lightbox) {
+    closeLightbox();
+  }
+});
+</script>
+
 </body>
 </html>

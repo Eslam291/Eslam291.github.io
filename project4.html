@@ -72,8 +72,11 @@
     }
 
     .gallery-grid img:hover {
-      transform: scale(1.05);
-    }
+    background: #e6c200;
+      transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(241, 196, 15, 0.4);
+  }
+    
 
     .gallery-grid::-webkit-scrollbar {
   height: 8px;
@@ -126,6 +129,11 @@
       h1 { font-size: 1.5em; margin-top: 60px; }
       .project-img { max-height: 220px; }
     }
+            .home-btn:hover {
+    background: #e6c200;
+      transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(241, 196, 15, 0.4);
+  }
   </style>
 </head>
 <body>
@@ -223,20 +231,26 @@
   </div>
 
   <script>
-    const images = [
-      'gallery4-1.webp','gallery4-2.webp','gallery4-3.webp',
-      'gallery4-4.webp','gallery4-5.webp','gallery4-6.webp',
-      'gallery4-7.webp','gallery4-8.webp','gallery4-9.webp',
-      'gallery4-10.webp','gallery4-11.webp','gallery4-12.webp',
-      'gallery4-13.webp','gallery4-14.webp'
-    ];
-    let current = 0;
+  const images = [
+    'gallery4-1.webp','gallery4-2.webp','gallery4-3.webp',
+    'gallery4-4.webp','gallery4-5.webp','gallery4-6.webp',
+    'gallery4-7.webp','gallery4-8.webp','gallery4-9.webp',
+    'gallery4-10.webp','gallery4-11.webp','gallery4-12.webp',
+    'gallery4-13.webp','gallery4-14.webp'
+  ];
+ let current = 0;
+const lightbox = document.querySelector('.lightbox');
+let lightboxIsOpen = false;
+document.getElementById('lightbox-img').addEventListener('click', function(e) {
+  e.stopPropagation();
+});
 
-  function openLightbox(index) {
+function openLightbox(index) {
   current = index;
   document.getElementById('lightbox-img').src = images[current];
-  document.querySelector('.lightbox').style.display = 'flex';
-  history.pushState({ lightbox: true }, ''); 
+  lightbox.style.display = 'flex';
+  lightboxIsOpen = true;
+  history.pushState({ lightboxOpen: true }, '');
 }
 
 function closeLightbox() {
@@ -253,6 +267,8 @@ function closeLightbox() {
   }, 100);
 }
 
+
+
     function changeImage(step) {
       current = (current + step + images.length) % images.length;
       document.getElementById('lightbox-img').src = images[current];
@@ -266,13 +282,14 @@ function closeLightbox() {
       }
     });
 
-   window.addEventListener('popstate', function (event) {
+window.addEventListener('popstate', function (event) {
   if (document.querySelector('.lightbox').style.display === 'flex') {
     document.querySelector('.lightbox').style.display = 'none';
   }
 });
 
-    
+  
   </script>
+
 </body>
 </html>

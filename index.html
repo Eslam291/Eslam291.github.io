@@ -6,12 +6,10 @@
   <title>Eslam Sayed Portfolio</title>
   <link rel="icon" type="image/webp" href="es-logo.webp" />
 
-  <!-- تحميل الخط بسرعة -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet" />
 
-  <!-- تحسين سرعة تحميل الصورة -->
   <link rel="preload" as="image" href="profile.jpeg" />
 
   <style>
@@ -38,7 +36,8 @@
       transition: transform 0.3s ease;
     }
     .icon-btn img:hover {
-      transform: scale(1.1);
+  transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(241, 196, 15, 0.4);
     }
 
     header {
@@ -104,7 +103,8 @@
 
     .project-card {
       background: #1a1a1a;
-      border-radius: 8px;
+      border-radius: 20px;
+     border: 2px solid #f1c40f;
       overflow: hidden;
       box-shadow: 0 4px 12px rgba(0,0,0,0.5);
       transition: transform 0.3s ease;
@@ -112,10 +112,12 @@
       color: #fff;
     }
 
-    .project-card:hover {
-      transform: scale(1.02);
-    }
+    
 
+.project-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(241, 196, 15, 0.4);
+}
     .project-card img {
       width: 100%;
       height: 180px;
@@ -125,7 +127,6 @@
     .project-card h3 {
       padding: 15px;
       font-size: 1.1rem;
-      background: #222;
     }
 
     @media (max-width: 600px) {
