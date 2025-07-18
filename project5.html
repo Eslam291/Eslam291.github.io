@@ -50,7 +50,7 @@
   .home-btn:hover {
     background: #e6c200;
       transform: translateY(-5px);
-  box-shadow: 0 6px 20px rgba(241, 196, 15, 0.4);
+  box-shadow: 0 8px 25px rgba(241, 196, 15, 0.4);
   }
     .article p { margin-bottom: 15px; }
     .article h3 { color: #FFD700; }
@@ -84,7 +84,7 @@
     .gallery-grid img:hover {
     background: #e6c200;
       transform: translateY(-5px);
-  box-shadow: 0 6px 20px rgba(241, 196, 15, 0.4);
+  box-shadow: 0 8px 25px rgba(241, 196, 15, 0.4);
   }
     
 
@@ -297,7 +297,8 @@
     <img src="cctv-4.webp" onclick="openLightbox(50)" loading="lazy" alt="CCTV 4">
   </div>
 
-  <div class="lightbox" onclick="closeLightbox()">
+  <div class="lightbox">
+
     <button class="close">✖</button>
     <button class="prev" onclick="event.stopPropagation(); changeImage(-1)">❮</button>
     <img id="lightbox-img" src="" />
