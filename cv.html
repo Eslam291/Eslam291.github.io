@@ -34,25 +34,24 @@
     }
 
     .back-button {
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  z-index: 1000;
-  background-color: #FFD700;
-  color: #000;
-  padding: 10px 20px;
-  text-decoration: none;
-  border-radius: 5px;
-  font-weight: bold;
-  transition: background 0.3s;
-}
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 1000;
+      background-color: #FFD700;
+      color: #000;
+      padding: 10px 20px;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
 
-.back-button:hover {
-    background: #e6c200;
+    .back-button:hover {
+      background: #e6c200;
       transform: translateY(-5px);
-  box-shadow: 0 8px 25px rgba(241, 196, 15, 0.4);
-  }
-
+      box-shadow: 0 8px 25px rgba(241, 196, 15, 0.4);
+    }
 
     .pdf-container {
       width: 100%;
@@ -62,40 +61,63 @@
       box-shadow: 0 0 15px rgba(0,0,0,0.5);
     }
 
-    .download-link {
+    .download-section {
       text-align: center;
-      margin-top: 20px;
+      margin-top: 25px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px; /* مسافة بين النص والزرار */
     }
 
-    .download-link a {
-      color: #FFD700;
+    .download-text {
+      font-size: 1rem;
       font-weight: bold;
-      text-decoration: underline;
+      color: #FFD700;
+    }
+
+    .download-btn img {
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      vertical-align: middle;
+    }
+
+    .download-btn img:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(241, 196, 15, 0.4);
     }
 
     @media (max-width: 768px) {
       h1 { font-size: 1.8rem; }
       .pdf-container { height: 65vh; }
+      .download-section { flex-direction: column; gap: 10px; }
     }
   </style>
 </head>
 <body>
   <a class="back-button" href="index.html">← Home</a>
-<div class="container">
-  <h1>My CV</h1>
+  <div class="container">
+    <h1>My CV</h1>
 
-  <!-- Embedded viewer with lazy loading -->
-  <iframe
-    loading="lazy"
-    src="https://drive.google.com/viewerng/viewer?embedded=true&url=https://eslam291.github.io/cv-eslam-sayed.pdf"
-    class="pdf-container"
-    allow="autoplay">
-  </iframe>
+    <!-- Embedded Google Drive Viewer -->
+    <iframe
+      loading="lazy"
+      src="https://drive.google.com/file/d/1ksLBfcmbOxO0Ubo5kVd5FG8oliEN30R1/preview"
+      class="pdf-container"
+      allow="autoplay">
+    </iframe>
 
-  <div class="download-link">
-    <a href="cv-eslam-sayed.pdf" download type="application/pdf" rel="noopener">Download the CV</a>
+    <div class="download-section">
+      <span class="download-text">You can download the CV from here:</span>
+      <a href="https://drive.google.com/uc?export=download&id=1ksLBfcmbOxO0Ubo5kVd5FG8oliEN30R1" 
+         class="download-btn" 
+         download 
+         rel="noopener">
+        <img src="cv-download.png" alt="Download CV" style="margin-left:30px; vertical-align:middle; cursor:pointer;" />
+      </a>
+    </div>
   </div>
-</div>
-
 </body>
 </html>
