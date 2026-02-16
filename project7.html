@@ -8,10 +8,69 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet"/>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-    body { background: #111; color: #fff; line-height: 1.6; }
+body {
+  background-image: url("background.WEBP");
+  background-size: cover;      
+  background-position: center;  
+  background-repeat: no-repeat;  
+  background-attachment: fixed;  
+  color: #f9f9f9;
+}
+
+body{
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* الجنبين */
+.triangle-side{
+  position: fixed;
+  top: 0;
+  bottom: 0;
+
+  pointer-events: none;
+  overflow: hidden;
+
+  z-index: 0;
+}
+
+/* نحسب العرض ديناميك */
+.left{
+  left: 0;
+  width: calc((100vw - 1000px) / 2);
+}
+
+.right{
+  right: 0;
+  width: calc((100vw - 1000px) / 2);
+}
+
+/* على الموبايل مفيش جناب → نخفيهم */
+@media (max-width:1000px){
+  .triangle-side{
+    display:none;
+  }
+}
+
+.triangle{
+  position:absolute;
+  opacity:0;
+  transition:opacity .25s ease;
+}
+
+
+    #typing-name {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #58a6ff; 
+  white-space: normal;
+  word-break: break-word;
+  overflow: hidden;
+}
+
     .container { max-width: 1000px; margin: auto; padding: 20px; }
     h1 { color: #FFD700; text-align: center; margin-bottom: 20px; font-size: 2.2em; }
-    h2, h3 { color: #FFD700; margin: 30px 0 15px; }
+    h2, h3 { color: #58a6ff; margin: 30px 0 15px; }
 
     .section { margin-bottom: 40px; }
 
@@ -25,14 +84,14 @@
       object-fit: contain;
       border-radius: 10px;
       box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-      border: 4px solid #FFD700;
+      border: 4px solid  #58a6ff;
     }
 
     iframe.pdf-viewer {
       width: 100%;
       height: 80vh;
-      border: none;
-      border-radius: 8px;
+    border-radius: 10px;
+  border: 2px solid  #58a6ff;
       box-shadow: 0 0 15px rgba(0,0,0,0.5);
     }
 
@@ -40,7 +99,7 @@
       position: fixed;
       top: 20px;
       left: 20px;
-      background: #FFD700;
+      background: #58a6ff;
       color: #000;
       padding: 10px 20px;
       border-radius: 8px;
@@ -49,12 +108,11 @@
       z-index: 10000;
     }
   .home-btn:hover {
-    background: #e6c200;
       transform: translateY(-5px);
-  box-shadow: 0 8px 25px rgba(241, 196, 15, 0.4);
+  box-shadow: 0 30px 30px rgba(6, 35, 86, 0.9);
   }
     .article p { margin-bottom: 15px; }
-    .article h3 { color: #FFD700; }
+    .article h3 { color: #58a6ff; }
 
     .gallery-grid {
       display: flex;
@@ -72,13 +130,12 @@
       cursor: pointer;
       scroll-snap-align: start;
       transition: transform 0.3s;
-      border: 2px solid #FFD700;
+      border: 4px solid  #58a6ff;
     }
 
     .gallery-grid img:hover {
-      background: #e6c200;
       transform: translateY(-5px);
-  box-shadow: 0 8px 25px rgba(241, 196, 15, 0.4);
+  box-shadow: 0 30px 30px rgba(6, 35, 86, 0.9);
     }
 
     .gallery-grid::-webkit-scrollbar {
@@ -89,7 +146,7 @@
       border-radius: 4px;
     }
     .gallery-grid::-webkit-scrollbar-thumb {
-      background: #FFD700;
+      background: #58a6ff;
       border-radius: 4px;
     }
 
@@ -114,7 +171,7 @@
     .lightbox .close, .lightbox .prev, .lightbox .next {
       position: absolute;
       font-size: 30px;
-      color: #FFD700;
+      color: #58a6ff;
       background: none;
       border: none;
       cursor: pointer;
@@ -138,7 +195,10 @@
   <a href="index.html" class="home-btn">← Home</a>
 
   <div class="container">
-    <h1>Commercial Building</h1>
+  <h1 id="typing-name">Commercial Building</h1>
+
+<div class="triangle-side left"></div>
+<div class="triangle-side right"></div>
 
     <img src="cover-project7.webp" alt="Commercial Building Schematic" class="project-img"loading="eager">
 
@@ -146,7 +206,10 @@
       <h2>📑 Project Description</h2>
 
       <h3>Project Overview</h3>
-      <p>This is a lighting design project for a commercial building consisting of a ground floor, five typical floors, and a roof. The lighting simulation and layout were fully completed using DIALux Evo, in compliance with the Egyptian Code.</p>
+      <p>This is a design project for a commercial building consisting of a ground floor, five typical floors, and a roof. The lighting simulation and layout were fully completed using DIALux Evo, in compliance with the Egyptian Code.</p>
+  <h3>My Role</h3>
+    <p>My personal contribution to the team project was handling the entire project design process. This included ensuring proper lighting distribution, power system and load management, fire alarm system, light current, cable tray, scheduals , sld and rizers.</p>
+
 
       <h3>Lighting Design Stage</h3>
       <p>The design covers all floors and includes both normal and emergency lighting fixtures. Fixtures were carefully selected based on functionality and interior aesthetics, and include:</p>
@@ -160,20 +223,33 @@
       </ul>
       <p>Simulation results were optimized for lux levels and energy efficiency, forming a solid foundation for future load calculation and layout detailing.</p>
 
-      <h3>Software Used</h3>
+      
+     <h3>System Distribution</h3>
+
+<p>Systmes are distributed and documented on Revit. Each system had a separate lighting and power panel and circuits were connected appropriately. schedules were created, and circuit protection was applied based on Egyptian standards.</p>
+      <h3>Softwares Used</h3>
       <ul>
-        <li>DIALux Evo – For lighting simulation and documentation</li>
+        <li>DIALux Evo – For lighting simulation</li>
+         <li>Revit – For Design and Layouts</li>
       </ul>
 
-      <h3>Status</h3>
-      <p>The lighting system design is fully complete. Expansion into full MEP design (Power, HVAC, Fire Fighting, Low Current) is intended in later phases using Revit.</p>
-    </div>
 
     <div class="section">
       <h2>📷 Dialux Evo Pics</h2>
       <div class="gallery-grid" id="gallery-container">
         <!-- الصور هتتحط هنا تلقائي -->
       </div>
+
+      <div class="section">
+  <h2>📷 Project Pics</h2>
+  <div class="gallery-grid" id="gallery2"></div>
+</div>
+
+
+
+
+  
+
       <div class="lightbox" onclick="closeLightbox()">
         <button class="close">✖</button>
         <button class="prev" onclick="event.stopPropagation(); changeImage(-1)">❮</button>
@@ -189,32 +265,127 @@
   </div>
 
   <script>
+const el = document.getElementById("typing-name");
+
+const text = el.textContent; // الاسم الأصلي
+el.textContent = "";         // نمسحه مؤقتًا
+
+let i = 0;
+
+function typeWriter() {
+
+  // أثناء الكتابة → أبيض
+  el.style.color = "#e6edf3";
+  el.style.borderRightColor = "#e6edf3";
+
+  if (i < text.length) {
+    el.textContent += text[i];
+    i++;
+    setTimeout(typeWriter, 50); // السرعة (أبطأ)
+  } 
+  else {
+    // بعد ما يخلص → أزرق
+    el.style.color = "#58a6ff";
+    el.style.borderRightColor = "#58a6ff";
+  }
+}
+
+typeWriter();
+
+function createSideTriangles(sideClass) {
+  const container = document.querySelector(sideClass);
+  const count = 150; // عدد المثلثات زي قبل
+
+  const h = document.documentElement.scrollHeight;
+  const w = container.offsetWidth;
+
+  for (let i = 0; i < count; i++) {
+    const t = document.createElement("div");
+    t.className = "triangle";
+
+    const size = Math.random() * 30 + 10;
+
+    t.style.borderLeft = `${size/2}px solid transparent`;
+    t.style.borderRight = `${size/2}px solid transparent`;
+    t.style.borderBottom = `${size}px solid rgba(88,166,255,0.15)`; // أزرق فاتح
+
+    t.style.left = Math.random() * w + "px";
+    t.style.top = Math.random() * h + "px";
+
+    container.appendChild(t);
+
+    // ظهور تدريجي سريع
+    setTimeout(() => {
+      t.style.opacity = 1;
+    }, i * 7);
+  }
+}
+
+window.addEventListener("load", () => {
+  createSideTriangles(".triangle-side.left");
+  createSideTriangles(".triangle-side.right");
+});
+
+
+
+
+
+ 
+
+
+
     const images = Array.from({ length: 16 }, (_, i) => `gallery5-${i + 1}.webp`);
-    let current = 0;
+let current = 0;
+let activeImages = [];
+
     let lightboxIsOpen = false; 
     const lightbox = document.querySelector('.lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
 
 
-    const galleryContainer = document.getElementById("gallery-container");
-    images.forEach((src, i) => {
-      const img = document.createElement("img");
-      img.src = src;
-      img.alt = `Image ${i + 1}`;
-      img.loading = "eager";
-      img.decoding = "async";
-      img.onclick = () => openLightbox(i);
-      galleryContainer.appendChild(img);
-    });
+   
 
-function openLightbox(index) {
-  current = index;
-  lightboxImg.src = images[current];
-  lightbox.style.display = 'flex';
 
-  history.pushState({ lightboxOpen: true }, '');
-  lightboxIsOpen = true;
+function createGallery(id, prefix, count) {
+  const container = document.getElementById(id);
+
+  const images = Array.from({ length: count }, (_, i) => `${prefix}-${i+1}.webp`);
+
+  images.forEach((src, i) => {
+    const img = document.createElement("img");
+    img.src = src;
+    img.loading = "eager";
+
+    img.onclick = () => openLightbox(images, i);
+
+    container.appendChild(img);
+  });
 }
+
+
+function createGalleryManual(id, images) {
+  const container = document.getElementById(id);
+
+  images.forEach((src, i) => {
+    const img = document.createElement("img");
+    img.src = src;
+    img.loading = "eager";
+
+    img.onclick = () => openLightbox(images, i);
+
+    container.appendChild(img);
+  });
+}
+
+
+function openLightbox(imagesArr, index) {
+  activeImages = imagesArr;
+  current = index;
+
+  lightboxImg.src = activeImages[current];
+  lightbox.style.display = 'flex';
+}
+
 
 
 function closeLightbox() {
@@ -232,10 +403,11 @@ function closeLightbox() {
 }
 
 
-    function changeImage(step) {
-      current = (current + step + images.length) % images.length;
-      document.getElementById('lightbox-img').src = images[current];
-    }
+ function changeImage(step) {
+  current = (current + step + activeImages.length) % activeImages.length;
+  lightboxImg.src = activeImages[current];
+}
+
 
     document.addEventListener('keydown', function(e) {
       if (document.querySelector('.lightbox').style.display === 'flex') {
@@ -252,6 +424,23 @@ window.addEventListener('popstate', function () {
     closeLightbox();
   }
 });
+
+createGallery("gallery-container", "gallery5", 16);
+const gallery2Images = [
+  "lighting-project-7.webp",
+  "power-project-7.webp",
+  "fire-project-7.webp",
+  "light current-project-7.webp",
+  "cable tray1-project-7.webp",
+  "cable tray2-project-7.webp",
+  "cable tray3-project-7.webp",
+  "schedual1-7.webp",
+  "schedual2-7.webp",
+  "count.webp"
+];
+
+createGalleryManual("gallery2", gallery2Images);
+
 
 
   </script>

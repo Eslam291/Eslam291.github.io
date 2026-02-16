@@ -18,10 +18,37 @@
       margin: 0; padding: 0; box-sizing: border-box;
       font-family: 'Poppins', sans-serif;
     }
-    body {
-      background-color: #111;
-      color: #f9f9f9;
-    }
+body {
+  background-image: url("background.WEBP");
+  background-size: cover;      
+  background-position: center;  
+  background-repeat: no-repeat;  
+  background-attachment: fixed;  
+  color: #f9f9f9;
+}
+
+
+
+#triangle-bg {
+  position: absolute; /* فوق المحتوى */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 2; /* فوق أي سكشن غامق */
+}
+
+.triangle {
+  position: absolute;
+  width: 0;
+  height: 0;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%); /* مثلث */
+}
+
+
 
     .top-buttons {
       display: flex;
@@ -38,13 +65,14 @@
     }
     .icon-btn img:hover {
       transform: translateY(-5px);
-      box-shadow: 0 8px 25px rgba(241, 196, 15, 0.4);
+     box-shadow: 0 10px 40px #00ffff;
     }
 
     header {
       text-align: center;
       padding: 30px 20px;
-      background: #000;
+  background: rgba(10, 15, 25, 0.85);
+  backdrop-filter: blur(8px);
     }
 
     .header-flex {
@@ -58,18 +86,34 @@
 
     .header-flex h1 {
       font-size: 2.5rem;
-      color: #FFD700;
+      color: #e6edf3
+;
       text-shadow: 1px 1px 4px #444;
       margin: 0;
       white-space: nowrap;
     }
+
+
+    #typing-name {
+  font-size: 42px;
+  font-weight: bold;
+  color: #58a6ff; 
+  white-space: nowrap;
+  overflow: hidden;
+}
 
     .profile-img {
       width: 80px;
       height: 80px;
       object-fit: cover;
       border-radius: 50%;
-      border: 2px solid #FFD700;
+border: 2px solid #58a6ff;
+
+
+    }
+        .profile-img:hover {
+      transform: translateY(-5px);
+     box-shadow: 0 25px 40px rgba(6, 35, 86, 0.9);
     }
 
     .about-text {
@@ -90,7 +134,7 @@
     }
 
     h2 {
-      color: #FFD700;
+      color: #58a6ff;
       margin-bottom: 20px;
       border-bottom: 2px solid #333;
       padding-bottom: 5px;
@@ -105,7 +149,7 @@
     .project-card {
       background: #1a1a1a;
       border-radius: 20px;
-      border: 2px solid #f1c40f;
+border: 2px solid #58a6ff;
       overflow: hidden;
       box-shadow: 0 4px 12px rgba(0,0,0,0.5);
       transition: transform 0.3s ease;
@@ -115,15 +159,21 @@
 
     .project-card:hover {
       transform: translateY(-5px);
-      box-shadow: 0 8px 25px rgba(241, 196, 15, 0.4);
+     box-shadow: 0 30px 30px rgba(6, 35, 86, 0.9);
     }
+
+.project-card:hover h3,
+.project-card:hover p,
+.project-card:hover span {
+  color: #58a6ff;
+}
 
     .project-card img {
       width: 100%;
       height: 180px;
       object-fit: cover;
     }
-
+ 
     .project-card h3 {
       padding: 15px;
       font-size: 1.1rem;
@@ -135,7 +185,7 @@
   margin-right: 15px;
   font-size: 1rem;
   font-weight: bold;
-  color: #FFD700;
+  color: #e6edf3;
 }
 
     .revit-family {
@@ -150,7 +200,7 @@
     }
     .revit-family a img:hover {
       transform: translateY(-5px);
-      box-shadow: 0 8px 25px rgba(241, 196, 15, 0.4);
+      box-shadow: 0 25px 40px rgba(6, 35, 86, 0.9);
     }
     .revit-family h2 {
       margin-left: 10px;
@@ -185,10 +235,18 @@
         font-size: 0.9rem;
       }
 
-    }
+      
+
+  
+
+
   </style>
 </head>
 <body>
+
+  <!-- Triangle container -->
+<div id="triangle-bg"></div>
+
 
   <!-- ====== TOP BUTTONS ====== -->
   <div class="top-buttons">
@@ -216,7 +274,7 @@
   <!-- ====== HEADER ====== -->
   <header>
     <div class="header-flex">
-      <h1>Eslam Sayed</h1>
+      <h1 id="typing-name">Eslam Sayed</h1>
       <img src="profile.webp" alt="Profile Picture" class="profile-img" loading="eager" />
     </div>
     <p class="about-text">
@@ -242,9 +300,11 @@ Also skilled in electrical distribution, including load calculations, Panel sche
   <section>
     <h2>Power Distribution Projects</h2>
     <div class="projects-grid">
-      <a href="project5.html" class="project-card"><img src="cover-project5.webp" alt="" loading="eager"><h3>Project 1</h3></a>
-      <a href="project6.html" class="project-card"><img src="cover-project6.webp" alt="" loading="eager"><h3>Project 2</h3></a>
-      <a href="project7.html" class="project-card"><img src="cover-project7.webp" alt="" loading="eager"><h3>Project 3</h3></a>
+      <a href="project5.html" class="project-card"><img src="cover-project5.webp" alt="" loading="eager"><h3>Commercial Building</h3></a>
+      <a href="project6.html" class="project-card"><img src="cover-project6.webp" alt="" loading="eager"><h3>Commercial Building</h3></a>
+      <a href="project7.html" class="project-card"><img src="cover-project7.webp" alt="" loading="eager"><h3>Commercial Building</h3></a>
+      <a href="project8.html" class="project-card"><img src="cover-project8.webp" alt="" loading="eager"><h3>Control Building</h3></a>
+      <a href="project9.html" class="project-card"><img src="cover-project9.webp" alt="" loading="eager"><h3>Niqat Building</h3></a>
     </div>
   </section>
 
@@ -254,10 +314,102 @@ Also skilled in electrical distribution, including load calculations, Panel sche
   <p style="display: flex; align-items: center; gap: 10px; margin-top: 30px;">
     <span class="download-text">You can download the family from here:</span>
     <a href="https://drive.google.com/uc?export=download&id=1ON5Rew9p-8EXTWKDaFGPyjbaaP5qDIV2" class="icon-btn">
-      <img src="family.png" alt="Revit Family" style="margin-left:30px; vertical-align:middle; cursor:pointer;" />
+      <img src="family.webp" alt="Revit Family" style="margin-left:30px; vertical-align:middle; cursor:pointer;" />
     </a>
   </p>
 </section>
+
+<!-- Feedback Section 
+<section>
+  <h2>Give Me Feedback</h2>
+  <p style="display: flex; align-items: center; gap: 10px; margin-top: 30px;">
+-->
+
+
+
+
+
+<script>
+const el = document.getElementById("typing-name");
+
+const text = el.textContent; // الاسم الأصلي
+el.textContent = "";         // نمسحه مؤقتًا
+
+let i = 0;
+
+function typeWriter() {
+
+  // أثناء الكتابة → أبيض
+  el.style.color = "#e6edf3";
+  el.style.borderRightColor = "#e6edf3";
+
+  if (i < text.length) {
+    el.textContent += text[i];
+    i++;
+    setTimeout(typeWriter, 120); // السرعة (أبطأ)
+  } 
+  else {
+    // بعد ما يخلص → أزرق
+    el.style.color = "#58a6ff";
+    el.style.borderRightColor = "#58a6ff";
+  }
+}
+
+typeWriter();
+
+const triangleContainer = document.getElementById('triangle-bg');
+const numTriangles = 120;
+const minSize = 10;
+const maxSize = 40;
+
+const mainSection = document.querySelector('section');
+const sectionTop = mainSection.offsetTop;
+const pageHeight = document.body.scrollHeight;
+
+for (let i = 0; i < numTriangles; i++) {
+  const tri = document.createElement('div');
+  tri.classList.add('triangle');
+
+  const size = Math.random() * (maxSize - minSize) + minSize;
+
+  // y عشوائي على طول الصفحة
+  const y = Math.random() * pageHeight;
+
+  let x;
+
+  if (y < sectionTop) {
+
+    x = Math.random() * window.innerWidth;
+  } else {
+   
+    const sideOffset = 80;
+    x = Math.random() < 0.5 
+        ? Math.random() * sideOffset       // Left
+        : window.innerWidth - (Math.random() * sideOffset + size); // Right
+  }
+
+  tri.style.borderLeft = `${size/2}px solid transparent`;
+  tri.style.borderRight = `${size/2}px solid transparent`;
+  tri.style.borderBottom = `${size}px solid rgba(0,0,255,0.15)`; 
+  tri.style.left = `${x}px`;
+  tri.style.top = `${y}px`;
+
+  triangleContainer.appendChild(tri);
+
+  // ظهور تدريجي حسب موقع y
+  setTimeout(() => {
+    tri.style.opacity = 1;
+  }, y * 2);
+}
+
+
+
+
+
+
+
+
+</script>
 
 
 </body>

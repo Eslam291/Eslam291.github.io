@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>CV | Eslam Sayed</title>
-  <link rel="icon" type="image/png" href="es-logo.png">
+  <link rel="icon" type="image/webp" href="es-logo.webp" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
@@ -15,10 +15,39 @@
       box-sizing: border-box;
       font-family: 'Poppins', sans-serif;
     }
-    body {
-      background-color: #111;
-      color: #fff;
-    }
+body {
+  background-image: url("background.WEBP");
+  background-size: cover;      
+  background-position: center;  
+  background-repeat: no-repeat;  
+  background-attachment: fixed;  
+  color: #f9f9f9;
+}
+
+    #typing-name {
+  font-size: 42px;
+  font-weight: bold;
+  color: #58a6ff; 
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+
+#triangle-bg {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.triangle {
+  position: absolute;
+  width: 0;
+  height: 0;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
 
     .container {
       max-width: 1000px;
@@ -28,7 +57,7 @@
 
     h1 {
       text-align: center;
-      color: #FFD700;
+      color: #58a6ff;
       margin-bottom: 20px;
       font-size: 2.2rem;
     }
@@ -38,7 +67,7 @@
       top: 20px;
       left: 20px;
       z-index: 1000;
-      background-color: #FFD700;
+      background-color: #58a6ff;
       color: #000;
       padding: 10px 20px;
       text-decoration: none;
@@ -48,18 +77,24 @@
     }
 
     .back-button:hover {
-      background: #e6c200;
       transform: translateY(-5px);
-      box-shadow: 0 8px 25px rgba(241, 196, 15, 0.4);
+      box-shadow: 0 30px 30px rgba(6, 35, 86, 0.9);
     }
 
-    .pdf-container {
-      width: 100%;
-      height: 78vh;
-      border: none;
-      border-radius: 6px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.5);
-    }
+
+
+.pdf-container {
+  position: relative;
+  z-index: 10; 
+  width: 100%;
+  height: 78vh;
+  border: 2px solid #58a6ff;
+  border-radius: 6px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.5);
+  background: #0b1a2b; 
+}
+
+
 
     .download-section {
       text-align: center;
@@ -73,7 +108,7 @@
     .download-text {
       font-size: 1rem;
       font-weight: bold;
-      color: #FFD700;
+      color: #f9f9f9;
     }
 
     .download-btn img {
@@ -86,8 +121,10 @@
 
     .download-btn img:hover {
       transform: translateY(-5px);
-      box-shadow: 0 8px 25px rgba(241, 196, 15, 0.4);
+      box-shadow: 0 10px 40px #00ffff;
     }
+    
+
 
     @media (max-width: 768px) {
       h1 { font-size: 1.8rem; }
@@ -97,9 +134,12 @@
   </style>
 </head>
 <body>
+    <!-- Triangle container -->
+<div id="triangle-bg"></div>
+
   <a class="back-button" href="index.html">← Home</a>
   <div class="container">
-    <h1>My CV</h1>
+     <h1 id="typing-name">My CV</h1>
 
     <!-- Embedded Google Drive Viewer -->
     <iframe
@@ -115,9 +155,96 @@
          class="download-btn" 
          download 
          rel="noopener">
-        <img src="cv-download.png" alt="Download CV" style="margin-left:30px; vertical-align:middle; cursor:pointer;" />
+        <img src="cv-download.webp" alt="Download CV" style="margin-left:30px; vertical-align:middle; cursor:pointer;" />
       </a>
     </div>
   </div>
+
+<script>
+  
+const el = document.getElementById("typing-name");
+
+const text = el.textContent; // الاسم الأصلي
+el.textContent = "";         // نمسحه مؤقتًا
+
+let i = 0;
+
+function typeWriter() {
+
+  // أثناء الكتابة → أبيض
+  el.style.color = "#e6edf3";
+  el.style.borderRightColor = "#e6edf3";
+
+  if (i < text.length) {
+    el.textContent += text[i];
+    i++;
+    setTimeout(typeWriter, 120); // السرعة (أبطأ)
+  } 
+  else {
+    // بعد ما يخلص → أزرق
+    el.style.color = "#58a6ff";
+    el.style.borderRightColor = "#58a6ff";
+  }
+}
+
+typeWriter();
+
+window.addEventListener("load", () => {
+
+  const bg = document.getElementById("triangle-bg");
+  const pdf = document.querySelector(".pdf-container");
+
+  const count = 120;
+  const minSize = 10;
+  const maxSize = 40;
+
+  const pageH = document.documentElement.scrollHeight;
+  const pageW = window.innerWidth;
+
+  // أبعاد الكونتينر بدقة
+  const rect = pdf.getBoundingClientRect();
+  const pdfTop = rect.top + window.scrollY;
+  const pdfBottom = pdfTop + rect.height;
+  const pdfLeft = rect.left;
+  const pdfRight = rect.right;
+
+  for (let i = 0; i < count; i++) {
+
+    const tri = document.createElement("div");
+    tri.className = "triangle";
+
+    const size = Math.random() * (maxSize - minSize) + minSize;
+
+    let x, y;
+
+    // 👇 استثناء مستطيل الكونتينر بالكامل (X + Y)
+    do {
+      x = Math.random() * pageW;
+      y = Math.random() * pageH;
+    } while (
+      x > pdfLeft && x < pdfRight &&
+      y > pdfTop && y < pdfBottom
+    );
+
+    tri.style.borderLeft = `${size/2}px solid transparent`;
+    tri.style.borderRight = `${size/2}px solid transparent`;
+    tri.style.borderBottom = `${size}px solid rgba(0,120,255,0.18)`;
+
+    tri.style.left = x + "px";
+    tri.style.top = y + "px";
+
+    bg.appendChild(tri);
+
+    // ظهور تدريجي
+    setTimeout(() => {
+      tri.style.opacity = 1;
+    }, i * 20);
+  }
+
+});
+
+
+</script>
+
 </body>
 </html>

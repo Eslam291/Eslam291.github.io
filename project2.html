@@ -13,9 +13,66 @@
       margin: 0; padding: 0; box-sizing: border-box;
       font-family: 'Poppins', sans-serif;
     }
-    body {
-      background: #111; color: #fff; line-height: 1.6;
-    }
+body {
+  background-image: url("background.WEBP");
+  background-size: cover;      
+  background-position: center;  
+  background-repeat: no-repeat;  
+  background-attachment: fixed;  
+  color: #f9f9f9;
+}
+
+body{
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* الجنبين */
+.triangle-side{
+  position: fixed;
+  top: 0;
+  bottom: 0;
+
+  pointer-events: none;
+  overflow: hidden;
+
+  z-index: 0;
+}
+
+/* نحسب العرض ديناميك */
+.left{
+  left: 0;
+  width: calc((100vw - 1000px) / 2);
+}
+
+.right{
+  right: 0;
+  width: calc((100vw - 1000px) / 2);
+}
+
+/* على الموبايل مفيش جناب → نخفيهم */
+@media (max-width:1000px){
+  .triangle-side{
+    display:none;
+  }
+}
+
+.triangle{
+  position:absolute;
+  opacity:0;
+  transition:opacity .25s ease;
+}
+
+
+    #typing-name {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #58a6ff; 
+  white-space: normal;
+  word-break: break-word;
+  overflow: hidden;
+}
+
     .container {
       max-width: 1000px;
       margin: auto;
@@ -30,7 +87,7 @@
     }
 
     h2 {
-      color: #FFD700;
+      color: #58a6ff;
       margin-bottom: 20px;
       text-align: center;
     }
@@ -49,14 +106,14 @@
   object-fit: contain;
   border-radius: 10px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-  border: 4px solid #FFD700;
+  border: 4px solid  #58a6ff;
 }
 
     iframe.pdf-viewer, iframe.video {
       width: 100%;
       height: 80vh;
-      border: none;
-      border-radius: 8px;
+  border-radius: 10px;
+  border: 2px solid  #58a6ff;
       box-shadow: 0 0 15px rgba(0,0,0,0.5);
     }
 
@@ -64,7 +121,7 @@
       position: fixed;
       top: 20px;
       left: 20px;
-      background: #FFD700;
+      background: #58a6ff;
       color: #000;
       padding: 10px 20px;
       border-radius: 8px;
@@ -80,7 +137,7 @@
     .article h3 {
       margin-top: 30px;
       margin-bottom: 10px;
-      color: #FFD700;
+      color: #58a6ff;
     }
 
     @media (max-width: 768px) {
@@ -103,9 +160,8 @@
     }
       }
   .home-btn:hover {
-    background: #e6c200;
       transform: translateY(-5px);
-  box-shadow: 0 8px 25px rgba(241, 196, 15, 0.4);
+  box-shadow: 0 30px 30px rgba(6, 35, 86, 0.9);
   }
   </style>
 </head>
@@ -113,7 +169,10 @@
   <a href="index.html" class="home-btn">← Home</a>
 
   <div class="container">
-    <h1>Automated Paint Color Mixing Machine</h1>
+    <h1 id="typing-name">Automated Paint Color Mixing Machine</h1>
+
+<div class="triangle-side left"></div>
+<div class="triangle-side right"></div>
 
     <img src="colormixer-schematic.webp" alt="Paint Mixing Machine Schematic" class="project-img"loading="eager">
 
@@ -202,3 +261,66 @@
   </div>
 </body>
 </html>
+
+<script>
+const el = document.getElementById("typing-name");
+
+const text = el.textContent; // الاسم الأصلي
+el.textContent = "";         // نمسحه مؤقتًا
+
+let i = 0;
+
+function typeWriter() {
+
+  // أثناء الكتابة → أبيض
+  el.style.color = "#e6edf3";
+  el.style.borderRightColor = "#e6edf3";
+
+  if (i < text.length) {
+    el.textContent += text[i];
+    i++;
+    setTimeout(typeWriter, 50); // السرعة (أبطأ)
+  } 
+  else {
+    // بعد ما يخلص → أزرق
+    el.style.color = "#58a6ff";
+    el.style.borderRightColor = "#58a6ff";
+  }
+}
+
+typeWriter();
+
+function createSideTriangles(sideClass) {
+  const container = document.querySelector(sideClass);
+  const count = 150; // عدد المثلثات زي قبل
+
+  const h = document.documentElement.scrollHeight;
+  const w = container.offsetWidth;
+
+  for (let i = 0; i < count; i++) {
+    const t = document.createElement("div");
+    t.className = "triangle";
+
+    const size = Math.random() * 30 + 10;
+
+    t.style.borderLeft = `${size/2}px solid transparent`;
+    t.style.borderRight = `${size/2}px solid transparent`;
+    t.style.borderBottom = `${size}px solid rgba(88,166,255,0.15)`; // أزرق فاتح
+
+    t.style.left = Math.random() * w + "px";
+    t.style.top = Math.random() * h + "px";
+
+    container.appendChild(t);
+
+    // ظهور تدريجي سريع
+    setTimeout(() => {
+      t.style.opacity = 1;
+    }, i * 7);
+  }
+}
+
+window.addEventListener("load", () => {
+  createSideTriangles(".triangle-side.left");
+  createSideTriangles(".triangle-side.right");
+});
+</script>
