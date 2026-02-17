@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Water Tank Filling & Discharge Control Using Node-RED</title>
+  <link rel="icon" href="es-logo.webp" type="image/webp" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+body {
+  background-image: url("background.webp");
+  background-size: cover;      
+  background-position: center;  
+  background-repeat: no-repeat;  
+  background-attachment: fixed;  
+  color: #f9f9f9;
+}
+
+body{
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* الجنبين */
+.triangle-side{
+  position: fixed;
+  top: 0;
+  bottom: 0;
+
+  pointer-events: none;
+  overflow: hidden;
+
+  z-index: 0;
+}
+
+/* نحسب العرض ديناميك */
+.left{
+  left: 0;
+  width: calc((100vw - 1000px) / 2);
+}
+
+.right{
+  right: 0;
+  width: calc((100vw - 1000px) / 2);
+}
+
+/* على الموبايل مفيش جناب → نخفيهم */
+@media (max-width:1000px){
+  .triangle-side{
+    display:none;
+  }
+}
+
+.triangle{
+  position:absolute;
+  opacity:0;
+  transition:opacity .25s ease;
+}
+
+
+    #typing-name {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #58a6ff; 
+  white-space: normal;
+  word-break: break-word;
+  overflow: hidden;
+}
+
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #FFD700;
+      margin-bottom: 20px;
+      text-align: center;
+      font-size: 2.2em;
+    }
+
+    h2 {
+      color: #58a6ff;
+      margin-bottom: 20px;
+    }
+
+    .section {
+      margin-bottom: 40px;
+    }
+
+   .project-img {
+  display: block;
+  margin: 30px auto;
+  width: auto;
+  max-width: 90%;
+  height: auto;
+  max-height: 400px;
+  object-fit: contain;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+  border: 4px solid  #58a6ff;
+}
+
+    iframe.pdf-viewer, iframe.video {
+      width: 100%;
+      height: 80vh;
+  border-radius: 10px;
+  border: 2px solid  #58a6ff;
+      box-shadow: 0 0 15px rgba(0,0,0,0.5);
+    }
+
+    .home-btn {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background: #58a6ff;
+      color: #000;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: bold;
+      text-decoration: none;
+      z-index: 10000;
+    }
+
+    .article p {
+      margin-bottom: 15px;
+    }
+
+    .article h3 {
+      margin-top: 30px;
+      margin-bottom: 10px;
+      color: #58a6ff;
+    }
+
+   
+    .gallery-grid {
+      display: flex;
+      overflow-x: auto;
+      gap: 15px;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 10px;
+    }
+
+    .gallery-grid img {
+      flex: 0 0 auto;
+      width: 250px;
+      border-radius: 10px;
+      cursor: pointer;
+      scroll-snap-align: start;
+      transition: transform 0.3s;
+      border: 4px solid  #58a6ff;
+    }
+
+    .gallery-grid img:hover {
+   transform: translateY(-5px);
+    box-shadow: 0 30px 30px rgba(6, 35, 86, 0.9);
+
+    }
+
+.gallery-grid::-webkit-scrollbar {
+  height: 8px;
+}
+.gallery-grid::-webkit-scrollbar-track {
+  background: #333;
+  border-radius: 4px;
+}
+.gallery-grid::-webkit-scrollbar-thumb {
+  background: #58a6ff;
+  border-radius: 4px;
+}
+
+    
+    .lightbox {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      flex-direction: column;
+    }
+
+    .lightbox img {
+      max-width: 90%;
+      max-height: 80vh;
+      border-radius: 10px;
+    }
+
+    .lightbox .close, .lightbox .prev, .lightbox .next {
+      position: absolute;
+      top: 20px;
+      font-size: 30px;
+      color: #58a6ff;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .lightbox .close {
+      right: 30px;
+    }
+
+    .lightbox .prev {
+      left: 30px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .lightbox .next {
+      right: 30px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    @media (max-width: 768px) {
+      iframe.pdf-viewer, iframe.video { height: 250px; }
+    
+      .home-btn {
+        top: 10px !important;
+        left: 10px !important;
+        padding: 8px 14px !important;
+        font-size: 14px !important;
+      }
+
+
+
+      h1 {
+        font-size: 1.5em;
+        margin-top: 60px;
+      }
+
+      .project-img {
+        max-height: 220px;
+      }
+    }
+            .home-btn:hover {
+    background: #58a6ff;
+      transform: translateY(-5px);
+    box-shadow: 0 30px 30px rgba(6, 35, 86, 0.9);
+  }
+  </style>
+</head>
+<body>
+  <a href="index.html" class="home-btn">← Home</a>
+
+  <div class="container">
+    <h1 id="typing-name">Water Tank Filling & Discharge Control Using Node-RED</h1>
+
+<div class="triangle-side left"></div>
+<div class="triangle-side right"></div>
+
+    <img src="cover-project10.webp" alt="Water Station Schematic" class="project-img"loading="eager">
+
+    <div class="section article">
+      <h2>Project Overview</h2>
+
+      <p>This project presents a complete water tank filling and discharge control system developed without using a traditional PLC.
+Instead, the entire control logic was implemented using Node-RED, while the industrial process was simulated on Factory I/O and connected through Modbus TCP/IP communication.
+The goal was to demonstrate how modern software-based solutions (Soft PLC concept) can replace conventional PLCs for small and medium automation systems with lower cost and higher flexibility.
+Node-RED acted as the system “brain,” reading sensor data and writing control commands directly to the field devices via Modbus registers.</p>
+
+
+<h3>System Operation</h3>
+
+   <ul>The system controls both filling and discharge valves with safe and practical industrial logic:
+
+Filling / Discharge Control,
+
+<p></p>
+<p>Each valve has:</p>
+
+  <li>Start button.</li>
+
+ <li>Stop button.</li>
+
+ <li>Slider (0–100% opening).</li>
+
+<p></p>
+<p>Logic behavior:</p>
+
+ <li>Press Start → slider becomes active and sends valve opening percentage.</li>
+
+ <li>Press Stop → valve closes immediately (0%) and further control is disabled.</li>
+
+ <li>No command is accepted again until Start is pressed.</li>
+
+ <li>This prevents accidental valve operation and improves safety.</li>
+
+ <li>Monitoring & Alarms</li>
+
+<p>The dashboard displays:</p>
+
+<li>Real-time flowmeter graph</li>
+
+<li>Tank level states: LL, L, H, HH</li>
+
+<li>High-level alarm with sound and message: “Warning: High Level Water”</li>
+   </ul>
+
+      <h3>🛠️ My Role</h3>
+      <ul>
+        <li>Designed full control logic in Node-RED.</li>
+        <li>Implemented Modbus TCP communication mapping.</li>
+        <li>Built HMI dashboard and visualization.</li>
+        <li>Tested and validated the system using Factory I/O simulation.</li>
+
+      </ul>
+
+      <h3>💡 Tools & Technologies</h3>
+    <ul>
+        <li>Node-RED – Control logic & dashboard.</li>
+        <li>Factory I/O – Process simulation.</li>
+        <li>Modbus TCP/IP – Industrial communication.</li>
+        <li>Flowmeters, level sensors, control valves (simulated field devices).</li>
+
+      </ul>
+
+            <h3> Key Outcomes</h3>
+    <ul>
+        <li>PLC-less automation system.</li>
+        <li>Reliable industrial communication via Modbus.</li>
+        <li>Real-time monitoring and alarms.</li>
+        <li>Flexible and low-cost control architecture.</li>
+
+      </ul>
+
+
+
+
+
+    <div class="section">
+      <h2>🎥 Project Simulation Video</h2>
+      <iframe class="video" src="https://drive.google.com/file/d/13fDQgrnvB3Q0b90Gu_Cz-uCGqvtBt7Wz/preview" allow="autoplay"></iframe>
+    </div>
+
+  <script>
+const el = document.getElementById("typing-name");
+
+const text = el.textContent; // الاسم الأصلي
+el.textContent = "";         // نمسحه مؤقتًا
+
+let i = 0;
+
+function typeWriter() {
+
+  // أثناء الكتابة → أبيض
+  el.style.color = "#e6edf3";
+  el.style.borderRightColor = "#e6edf3";
+
+  if (i < text.length) {
+    el.textContent += text[i];
+    i++;
+    setTimeout(typeWriter, 50); // السرعة (أبطأ)
+  } 
+  else {
+    // بعد ما يخلص → أزرق
+    el.style.color = "#58a6ff";
+    el.style.borderRightColor = "#58a6ff";
+  }
+}
+
+typeWriter();
+
+function createSideTriangles(sideClass) {
+  const container = document.querySelector(sideClass);
+  const count = 150; // عدد المثلثات زي قبل
+
+  const h = document.documentElement.scrollHeight;
+  const w = container.offsetWidth;
+
+  for (let i = 0; i < count; i++) {
+    const t = document.createElement("div");
+    t.className = "triangle";
+
+    const size = Math.random() * 30 + 10;
+
+    t.style.borderLeft = `${size/2}px solid transparent`;
+    t.style.borderRight = `${size/2}px solid transparent`;
+    t.style.borderBottom = `${size}px solid rgba(88,166,255,0.15)`; // أزرق فاتح
+
+    t.style.left = Math.random() * w + "px";
+    t.style.top = Math.random() * h + "px";
+
+    container.appendChild(t);
+
+    // ظهور تدريجي سريع
+    setTimeout(() => {
+      t.style.opacity = 1;
+    }, i * 7);
+  }
+}
+
+window.addEventListener("load", () => {
+  createSideTriangles(".triangle-side.left");
+  createSideTriangles(".triangle-side.right");
+});
+
+
+
+
+
+
+    const images = [
+      'gallery3-1.webp','gallery3-2.webp','gallery3-3.webp',
+      'gallery3-4.webp','gallery3-5.webp','gallery3-6.webp',
+      'gallery3-7.webp','gallery3-8.webp','gallery3-9.webp'
+    ];
+    let current = 0;
+
+const lightbox = document.querySelector('.lightbox');
+let lightboxIsOpen = false;
+document.getElementById('lightbox-img').addEventListener('click', function(e) {
+  e.stopPropagation();
+});
+
+function openLightbox(index) {
+  current = index;
+  document.getElementById('lightbox-img').src = images[current];
+  lightbox.style.display = 'flex';
+  lightboxIsOpen = true;
+  history.pushState({ lightboxOpen: true }, '');
+}
+
+function closeLightbox() {
+  lightbox.style.display = 'none';
+  lightboxIsOpen = false;
+
+  if (history.state && history.state.lightboxOpen) {
+    history.back();
+  }
+  setTimeout(() => {
+    if (!lightboxIsOpen && history.state && history.state.lightboxOpen) {
+      history.replaceState(null, '');
+    }
+  }, 100);
+}
+
+
+
+    function changeImage(step) {
+      current = (current + step + images.length) % images.length;
+      document.getElementById('lightbox-img').src = images[current];
+    }
+
+    document.addEventListener('keydown', function(e) {
+      if (document.querySelector('.lightbox').style.display === 'flex') {
+        if (e.key === 'ArrowRight') changeImage(1);
+        if (e.key === 'ArrowLeft') changeImage(-1);
+        if (e.key === 'Escape') closeLightbox();
+      }
+    });
+
+window.addEventListener('popstate', function (event) {
+  if (document.querySelector('.lightbox').style.display === 'flex') {
+    document.querySelector('.lightbox').style.display = 'none';
+  }
+});
+
+  
+  </script>
+</body>
+</html>

@@ -36,7 +36,7 @@ body {
   width: 100vw;
   height: 100vh;          /* طول الشاشة بس */
   pointer-events: none;
-  z-index: -1;            /* يخليها ورا المحتوى مش فوقه */
+  z-index: 0;            /* يخليها ورا المحتوى مش فوقه */
   overflow: hidden;
 }
 
@@ -73,7 +73,8 @@ body {
       text-align: center;
       padding: 30px 20px;
   background: rgba(10, 15, 25, 0.85);
-  backdrop-filter: blur(8px);
+  z-index: 1;
+
     }
 
     .header-flex {
@@ -96,7 +97,7 @@ body {
 
 
     #typing-name {
-  font-size: 39px;
+  font-size: 36px;
   font-weight: bold;
   color: #58a6ff; 
   white-space: nowrap;
@@ -252,6 +253,7 @@ border: 2px solid #58a6ff;
 
   <!-- ====== TOP BUTTONS ====== -->
   <div class="top-buttons">
+       <a href="Information.html" class="icon-btn"><img src="Information.webp" alt="Information" loading="eager" /></a>
     <a href="cv.html" class="icon-btn"><img src="cv.webp" alt="CV" loading="eager" /></a>
     <a href="#" onclick="openEmail();" class="icon-btn">
       <img src="gmail.webp" alt="Gmail" loading="eager" />
@@ -267,6 +269,7 @@ border: 2px solid #58a6ff;
         }
       }
     </script>
+    
 
     <a href="https://docs.google.com/forms/d/e/1FAIpQLSftAq3t36DVvreXexTf2Z6kazL8gCCEAEW0kdBn71ex6ySFKw/viewform?usp=header" target="_blank" class="icon-btn"><img src="form.webp" alt="Form" loading="eager" /></a>
     <a href="https://linkedin.com/in/eslam-sayed-065958343" target="_blank" class="icon-btn"><img src="linkedin.webp" alt="LinkedIn" loading="eager" /></a>
@@ -295,6 +298,7 @@ Also skilled in electrical distribution, including load calculations, Panel sche
       <a href="project2.html" class="project-card"><img src="cover-project2.webp" alt="" loading="eager"><h3>Paint Mixing Machine</h3></a>
       <a href="project3.html" class="project-card"><img src="cover-project3.webp" alt="" loading="eager"><h3>Smart Water Pumping Station</h3></a>
       <a href="project4.html" class="project-card"><img src="cover-project4.webp" alt="" loading="eager"><h3>Alternating Submersible Pumps</h3></a>
+      <a href="project10.html" class="project-card"><img src="cover-project10.webp" alt="" loading="eager"><h3>Water Tank Filling & Discharge Control Using Node-RED</h3></a>
     </div>
   </section>
 
