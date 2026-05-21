@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Information</title>
+  <link rel="icon" href="es-logo.webp" type="image/webp" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+body {
+  background-image: url("background.webp");
+  background-size: cover;      
+  background-position: center;  
+  background-repeat: no-repeat;  
+  background-attachment: fixed;  
+  color: #f9f9f9;
+}
+
+body{
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* الجنبين */
+.triangle-side{
+  position: fixed;
+  top: 0;
+  bottom: 0;
+
+  pointer-events: none;
+  overflow: hidden;
+
+  z-index: 0;
+}
+
+/* نحسب العرض ديناميك */
+.left{
+  left: 0;
+  width: calc((100vw - 1000px) / 2);
+}
+
+.right{
+  right: 0;
+  width: calc((100vw - 1000px) / 2);
+}
+
+/* على الموبايل مفيش جناب → نخفيهم */
+@media (max-width:1000px){
+  .triangle-side{
+    display:none;
+  }
+}
+
+.triangle{
+  position:absolute;
+  opacity:0;
+  transition:opacity .25s ease;
+}
+
+
+    #typing-name {
+  font-size: 2.2em;
+  font-weight: bold;
+  color: #58a6ff; 
+  white-space: normal;
+  word-break: break-word;
+  overflow: hidden;
+}
+
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #FFD700;
+      margin-bottom: 20px;
+      text-align: center;
+      font-size: 2.2em;
+    }
+
+    h2 {
+        font-size: 2em;
+  font-weight: bold;
+      color: #58a6ff;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .section {
+      margin-bottom: 40px;
+    }
+
+   .project-img {
+  display: block;
+  margin: 30px auto;
+  width: auto;
+  max-width: 75%;
+  height: auto;
+  max-height: 250px;
+  object-fit: contain;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+  border: 3px solid  #58a6ff;
+}
+
+    iframe.pdf-viewer, iframe.video {
+      width: 100%;
+      height: 80vh;
+  border-radius: 10px;
+  border: 2px solid  #58a6ff;
+      box-shadow: 0 0 15px rgba(0,0,0,0.5);
+    }
+
+    .home-btn {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background: #58a6ff;
+      color: #000;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: bold;
+      text-decoration: none;
+      z-index: 10000;
+    }
+
+    .article p {
+      margin-bottom: 15px;
+    }
+
+    .article E {
+      margin-bottom: 18px;
+      font-weight: bold;
+    }
+
+        .article h4 {
+      margin-bottom: 15px;
+      font-weight: bold;
+      font-size: 1.3em;
+
+    }
+
+    .article h3 {
+      margin-top: 30px;
+      margin-bottom: 10px;
+      color: #58a6ff;
+    }
+
+   
+    .gallery-grid {
+      display: flex;
+      overflow-x: auto;
+      gap: 15px;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 10px;
+    }
+
+    .gallery-grid img {
+      flex: 0 0 auto;
+      width: 250px;
+      border-radius: 10px;
+      cursor: pointer;
+      scroll-snap-align: start;
+      transition: transform 0.3s;
+      border: 4px solid  #58a6ff;
+    }
+
+    .gallery-grid img:hover {
+   transform: translateY(-5px);
+    box-shadow: 0 30px 30px rgba(6, 35, 86, 0.9);
+
+    }
+
+.gallery-grid::-webkit-scrollbar {
+  height: 8px;
+}
+.gallery-grid::-webkit-scrollbar-track {
+  background: #333;
+  border-radius: 4px;
+}
+.gallery-grid::-webkit-scrollbar-thumb {
+  background: #58a6ff;
+  border-radius: 4px;
+}
+
+    
+    .lightbox {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      flex-direction: column;
+    }
+
+    .lightbox img {
+      max-width: 90%;
+      max-height: 80vh;
+      border-radius: 10px;
+    }
+
+    .lightbox .close, .lightbox .prev, .lightbox .next {
+      position: absolute;
+      top: 20px;
+      font-size: 30px;
+      color: #58a6ff;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .lightbox .close {
+      right: 30px;
+    }
+
+    .lightbox .prev {
+      left: 30px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .lightbox .next {
+      right: 30px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    @media (max-width: 768px) {
+      iframe.pdf-viewer, iframe.video { height: 250px; }
+    
+      .home-btn {
+        top: 10px !important;
+        left: 10px !important;
+        padding: 8px 14px !important;
+        font-size: 14px !important;
+      }
+
+
+
+      h1 {
+        font-size: 1.5em;
+        margin-top: 60px;
+      }
+
+      .project-img {
+        max-height: 220px;
+      }
+    }
+            .home-btn:hover {
+    background: #58a6ff;
+      transform: translateY(-5px);
+    box-shadow: 0 30px 30px rgba(6, 35, 86, 0.9);
+  }
+  </style>
+</head>
+<body>
+  <a href="index.html" class="home-btn">← Home</a>
+
+  <div class="container">
+    <h1 id="typing-name">Who is Eslam Sayed?</h1>
+
+<div class="triangle-side left"></div>
+<div class="triangle-side right"></div>
+
+    <img src="es-logo.webp" alt="Information" class="project-img"loading="eager">
+
+    <div class="section article">
+      <h2>Overview</h2>
+
+      <p>Dynamic Electrical Power and Control Engineer with extensive hands-on experience in PLC/HMI programming,
+control panel design, and SCADA system development.
+Proficient in industrial automation, IIoT integration via Node-REd.
+Also skilled in electrical distribution, including load calculations, Panel schedules, breaker and protection sizing, short-circuit and voltage drop calculations for LV systems.</p>
+
+   <h2>Education</h2>
+<p>Bachelors of Engineering in Electrical Engineering & Control, Benha University- Branch Shoubra with GPA(3.13/4)</p>
+<h4>Graduation Project1:Packing and Detect Defective Product Machine (Grade: A+)</h4>
+ <p>developed an automated packaging and inspection system, verifying product 
+size, metal content, and weight before stamping accepted items. Used PLC, 
+HMI, and sensors, with TIA Portal, Factory I/O, EPLAN, and Microsoft Office 
+for programming and documentation.</p>
+<p></p>
+<p></p>
+<h4> Paint mixing machine (Grade: A+)</h4>
+ <p>Automated paint production system for mixing 7 color inputs with 
+temperature control and CIP cleaning. The process uses flowmeters, analog 
+level sensors, and PT100 for monitoring. Operates in both automatic (PLC
+based) and manual (selector switches) modes for reliability. Tools: Siemens 
+PLC, HMI, TIA Portal, EPLAN, and Microsoft Office for documentation.</p>
+
+
+
+   <h2>What Can I do?</h2>
+
+<h4>At Industrial Automation Field:</h4>
+
+<li>Design and implement classic control systems (relay logic, contactors, timers, protection circuits) based on project requirements.</li>
+<li>Build and wire complete electrical control panels, including component layout, power distribution,and protection devices (Panel Builder level knowledge)</li>
+<li>Program Siemens PLCs for industrial automation applications (logic development, interlocks, alarms, and process control)</li>
+<li>Develop HMI systems with professional and user-friendly UI designs for monitoring, control, and operator interaction</li>
+<li>Create basic SCADA systems for real-time monitoring, data visualization, and supervisory control.</li>
+<li>Configure industrial communication networks (PROFINET, Modbus, and other field protocols) for reliable device integration.</li>
+<li>Implement simple IIoT solutions using Node-RED, including dashboards, data acquisition, remote monitoring, and software-based control.</li>
+<p></p>
+<p></p>
+<h4>At Building Service Field:</h4>
+<li>Prepare electrical design drawings and shop drawings for lighting, power, and low-current systems.</li>
+<li>Design and coordinate Fire Alarm, and Low current systems including Data, Telephone, PA, and Nurse Call.</li>
+<li>Develop single-line diagrams (SLD), panel schedules, and cable routing layouts.</li>
+<li>Perform power system calculations including load estimation, short-circuit analysis, and voltage drop calculations.</li>
+<li>Size cables, cable trays, and protection devices according to project requirements and standards.</li>
+<li>Coordinate electrical works with HVAC and plumbing loads for integrated building services design.</li>
+<li>Coordination between electrical discipline and other engineering disciplines.</li>
+<p></p>
+<p></p>
+<h4>At BMS Field:</h4>
+<li>Identify and extract control points for various systems integrated with Building Management Systems (BMS).</li>
+<li>Develop complete I/O Lists for field devices including sensors, actuators, digital, and analog signals.</li>
+<li>Design and prepare professional BMS riser diagrams showing system architecture and network topology.</li>
+<li>Integrate field devices with DDC controllers through digital and analog I/O mapping.</li>
+<li>Integrate field devices through industrial networks and Ethernet communication via switches.</li>
+<li>Support BMS system integration, monitoring, and centralized control for HVAC and building services.</li>
+<p></p>
+<p></p>
+ <h2>Courses and Training</h2>
+ <h4>Electrical BIM</h4>
+ <p></p>
+<li>Gained strong knowledge of BIM process, BIM execution planning (BEP), LOD (Level of Development), and information management workflow, with hands-on experience in Revit electrical modeling and parametric family creation.</li>
+<li>Worked on BIM model coordination using Navisworks, including clash detection, model federation, interference checking, and interdisciplinary coordination within collaborative BIM environments.</li>
+<p></p>
+<h4>BMS</h4>
+<p></p>
+<p></p>
+<li>Learned how to identify and extract control points for different systems integrated with BMS.Worked with DDC controllers using digital and analog signals, as well as direct communication via networkcables to switches.</li>
+<li>Developed complete I/O Lists and prepared professional BMS Riser Diagrams as part of the course.</li>
+<p></p>
+<p></p>
+<h4>Industrial Automation</h4>
+<li>Learned and applied classic control concepts through hands-on tasks.</li>
+<li>Programmed and implemented PLC systems for real-world automation apps.</li>
+<li>Developed and configured HMI and SCADA interfaces through practical tasks.</li>
+<li>Worked with industrial communication protocols (PROFIBUS, PROFINET,Modbus) for system integration.</li>
+<li>Applied IIoT concepts by integrating Node-RED with cloud platforms and web interfaces.</li>
+<p></p>
+<p></p>
+<h4>Panel Builder</h4>
+<li>Designed and prepared shop drawings for electrical panels, including ATS, Power Factor Correction, MCC (HVAC), MDB, and more.</li>
+<li>Supervised and executed panel assembly and wiring in the factory, ensuring compliance with standards and project requirements.</li>
+<p></p>
+<p></p>
+<h4>Electrical Building Service</h4>
+<li>Design and prepare shop drawings for Lighting, Small Power, and Low Current Systems, with hands-on execution experience to meet project standards.</li>
+<li>Involved in MV/LV distribution design, including panel schedules, load estimation, short-circuit, and voltage drop calculations.</li>
+<li>Worked on individual and group projects covering electrical design and technical office tasks.</li>
+<p></p>
+<p></p>
+<h4>Metro Electrical Network</h4>
+<li>Assisted in metro electrical network design and power distribution from HV stations to control panels via transformers and RMUs, gaining understanding of system components, protection schemes, and control strategies.</li>
+<li>Developed foundation in large-scale infrastructure logic, electrical coordination practices, and safe metro operation procedures.</li>
+<p></p>
+<p></p>
+<h4>Quality Engineer</h4>
+<p>Experienced in testing electrical products and appliances under extreme 
+conditions to evaluate performance and safety. Conducted tests on cables, 
+lighting (e.g. waterproof), heaters, vacuum cleaners, and fire extinguishers.</p>
+<p></p>
+<p></p>
+
+
+
+    <div class="section">
+      <h2>📷 Certificates</h2>
+      <div class="gallery-grid">
+       <img src="Certificate-1.webp" alt=""loading="eager">
+       <img src="Certificate-2.webp" alt=""loading="eager">
+       <img src="Certificate-3.webp" alt=""loading="eager">
+       <img src="Certificate-4.webp" alt=""loading="eager">
+       <img src="Certificate-5.webp" alt=""loading="eager">       
+       <img src="Certificate-6.webp" alt=""loading="eager">
+       <img src="Certificate-7.webp" alt=""loading="eager">
+       <img src="Certificate-8.webp" alt=""loading="eager">
+       <img src="Certificate-9.webp" alt=""loading="eager">
+       <img src="Certificate-10.webp" alt=""loading="eager">
+       <img src="Certificate-11.webp" alt=""loading="eager">
+       <img src="Certificate-12.webp" alt=""loading="eager">
+       <img src="Certificate-13.webp" alt=""loading="eager">
+      </div>
+
+<!-- Lightbox functionality -->
+<div class="lightbox" onclick="closeLightbox()">
+  <button class="close">✖</button>
+  <button class="prev" onclick="event.stopPropagation(); changeImage(-1)">❮</button>
+  <img id="lightbox-img" src="" />
+  <button class="next" onclick="event.stopPropagation(); changeImage(1)">❯</button>
+</div>
+
+
+
+ <h2>Vision</h2>
+ <E>To build a leading global engineering consultancy company with a vision to become a key engineering advisory hub within its country of origin. The company aims to expand into a multinational organization with worldwide presence, delivering high-impact consultancy services and setting benchmarks for project quality and execution.</E>
+
+
+
+
+  <script>
+const el = document.getElementById("typing-name");
+
+const text = el.textContent; // الاسم الأصلي
+el.textContent = "";         // نمسحه مؤقتًا
+
+let i = 0;
+
+function typeWriter() {
+
+  // أثناء الكتابة → أبيض
+  el.style.color = "#e6edf3";
+  el.style.borderRightColor = "#e6edf3";
+
+  if (i < text.length) {
+    el.textContent += text[i];
+    i++;
+    setTimeout(typeWriter, 50); // السرعة (أبطأ)
+  } 
+  else {
+    // بعد ما يخلص → أزرق
+    el.style.color = "#58a6ff";
+    el.style.borderRightColor = "#58a6ff";
+  }
+}
+
+typeWriter();
+
+function createSideTriangles(sideClass) {
+  const container = document.querySelector(sideClass);
+  const count = 150; // عدد المثلثات زي قبل
+
+  const h = document.documentElement.scrollHeight;
+  const w = container.offsetWidth;
+
+  for (let i = 0; i < count; i++) {
+    const t = document.createElement("div");
+    t.className = "triangle";
+
+    const size = Math.random() * 30 + 10;
+
+    t.style.borderLeft = `${size/2}px solid transparent`;
+    t.style.borderRight = `${size/2}px solid transparent`;
+    t.style.borderBottom = `${size}px solid rgba(88,166,255,0.15)`; // أزرق فاتح
+
+    t.style.left = Math.random() * w + "px";
+    t.style.top = Math.random() * h + "px";
+
+    container.appendChild(t);
+
+    // ظهور تدريجي سريع
+    setTimeout(() => {
+      t.style.opacity = 1;
+    }, i * 7);
+  }
+}
+
+window.addEventListener("load", () => {
+  createSideTriangles(".triangle-side.left");
+  createSideTriangles(".triangle-side.right");
+});
+
+
+
+
+
+
+
+  const images = [
+    'Certificate-1.webp','Certificate-2.webp','Certificate-3.webp','Certificate-4.webp','Certificate-5.webp','Certificate-6.webp','Certificate-7.webp','Certificate-8.webp','Certificate-9.webp','Certificate-10.webp','Certificate-11.webp','Certificate-12.webp','Certificate-13.webp'
+]
+  let current = 0;
+let lightboxIsOpen = false;
+const lightbox = document.querySelector('.lightbox');
+const lightboxImg = document.getElementById('lightbox-img');
+
+
+ function openLightbox(index) {
+  current = index;
+  lightboxImg.src = images[current];
+  lightbox.style.display = 'flex';
+  history.pushState({ lightboxOpen: true }, '');
+  lightboxIsOpen = true;
+}
+
+
+function closeLightbox() {
+  lightbox.style.display = 'none';
+  lightboxIsOpen = false;
+
+  if (history.state && history.state.lightboxOpen) {
+    history.back();
+  }
+  setTimeout(() => {
+    if (!lightboxIsOpen && history.state && history.state.lightboxOpen) {
+      history.replaceState(null, '');
+    }
+  }, 100);
+}
+
+
+
+  function changeImage(step) {
+    current = (current + step + images.length) % images.length;
+    document.getElementById('lightbox-img').src = images[current];
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (document.querySelector('.lightbox').style.display === 'flex') {
+      if (e.key === 'ArrowRight') changeImage(1);
+      if (e.key === 'ArrowLeft') changeImage(-1);
+      if (e.key === 'Escape') closeLightbox();
+    }
+  });
+
+document.querySelectorAll('.gallery-grid img').forEach((img, index) => {
+  img.addEventListener('click', () => openLightbox(index));
+});
+
+
+  window.addEventListener('popstate', function () {
+  if (lightboxIsOpen) {
+    closeLightbox();
+  }
+});
+</script>
+</body>
+</html>
